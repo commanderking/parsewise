@@ -21,13 +21,11 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from "@chakra-ui/icons";
-import { useAuth0 } from "@auth0/auth0-react";
 import Link from "next/link";
 
 // Modified from https://github.com/hauptrolle/chakra-templates
 
 export default function WithSubnavigation() {
-  const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
   const { isOpen, onToggle } = useDisclosure();
 
   return (
@@ -87,11 +85,15 @@ export default function WithSubnavigation() {
           direction={"row"}
           spacing={6}
         >
-          <LoginLogoutButton
-            isAuthenticated={isAuthenticated}
-            handleLogin={loginWithRedirect}
-            handleLogout={logout}
-          />
+          {/* <Button
+            as={"a"}
+            fontSize={"sm"}
+            fontWeight={400}
+            variant={"link"}
+            onClick={() => {}}
+          >
+            Sign in
+          </Button> */}
           {/*
             Leave out sign up button until we're ready for actual signups
           */}
@@ -281,22 +283,3 @@ interface NavItem {
 }
 
 const NAV_ITEMS: Array<NavItem> = [];
-
-const LoginLogoutButton = ({ isAuthenticated, handleLogin, handleLogout }) => {
-  const buttonText = isAuthenticated ? "Sign out" : "Sign in";
-  const handleClick = isAuthenticated ? handleLogout : handleLogin;
-
-  return (
-    <Button
-      as={"a"}
-      fontSize={"sm"}
-      fontWeight={400}
-      variant={"link"}
-      onClick={() => {
-        handleClick();
-      }}
-    >
-      {buttonText}
-    </Button>
-  );
-};

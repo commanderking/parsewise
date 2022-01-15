@@ -1,31 +1,18 @@
 import { useEffect } from "react";
 import { Box, Heading, Grid, Text, Button } from "@chakra-ui/react";
 import { getCustomProjects } from "templates/coordinategrid/requests";
-import { useAuth } from "store/auth/useAuth";
 import { useRouter } from "next/router";
 
 const TeacherDashboardContainer = () => {
   const router = useRouter();
-  const { hasLoadedUser, user, signOut } = useAuth();
 
   const projects = getCustomProjects();
-
-  useEffect(() => {
-    if (!user && hasLoadedUser) {
-      router.push("/teacher/signin");
-    }
-  });
-
-  if (!hasLoadedUser || !user) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <Box>
       <Heading>My Custom Projects</Heading>
       <Button
         onClick={async () => {
-          await signOut();
           router.push("/teacher/signin");
         }}
       >
