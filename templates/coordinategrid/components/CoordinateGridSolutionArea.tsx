@@ -70,8 +70,6 @@ const CoordinateGridSolutionArea = ({
     };
   };
 
-  console.log("initialIcons", initialIcons);
-
   return (
     <Box>
       <Box width={400} margin={margin}>

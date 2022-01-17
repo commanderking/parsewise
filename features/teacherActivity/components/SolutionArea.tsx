@@ -1,7 +1,7 @@
 import { Box, Heading, Text, Divider } from "@chakra-ui/react";
 import CoordinateGridSolutionArea from "templates/coordinategrid/components/CoordinateGridSolutionArea";
 import { ArrowUp } from "react-feather";
-// TODO: Update props
+// TODO: Update prop types
 type Props = {
   solutionProps: any;
   title: string;
@@ -15,7 +15,6 @@ const TopProposals = ({ solutionProps, title }) => {
       <Heading size="md">{title}</Heading>
       <Box mb={4}>
         {solutionProps.solutions.map((solution) => {
-          console.log("solution", solution);
           return (
             <Box display="inline-block">
               <Box>

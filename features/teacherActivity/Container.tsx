@@ -33,8 +33,6 @@ const TeacherActivityContainer = () => {
     solutions: otherSolutions,
   };
 
-  console.log({ topSolutionProps });
-
   return (
     <Box>
       <Heading>Cell Towers</Heading>
