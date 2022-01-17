@@ -1,24 +1,29 @@
 import { CoordinateGridPhases } from "templates/coordinategrid/constants";
 import { Phase } from "templates/types";
+import { CoordinateGridSolution } from "templates/coordinategrid/types";
+import { iconMap } from "constants/icons";
 
-export const getDefaultIconCoordinates = (coordinates) => {
-  return coordinates.map((coordinate) => ({
+export const getDefaultIconCoordinates = (
+  solutionCoordinates: CoordinateGridSolution[]
+) => {
+  return solutionCoordinates.map((coordinate) => ({
     ...coordinate,
     size: 15,
-    image: "/home-icon.svg",
+    image: iconMap.HOUSE.src,
     canRemove: false,
   }));
 };
 
-export const getPlacedIconsForSolution = (solution) => {
-  console.log("solution", solution);
-  return solution.map((coordinate) => {
+export const getPlacedIconsForSolution = (
+  solutionCoordinates: CoordinateGridSolution[]
+) => {
+  return solutionCoordinates.map((coordinate) => {
     const { x, y } = coordinate;
     return {
       x,
       y,
       size: 20,
-      image: "/cell-tower.svg",
+      image: iconMap.CELL_TOWER.src,
       canRemove: true,
     };
   });
