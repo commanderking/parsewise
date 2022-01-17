@@ -3,7 +3,7 @@ import {
   Phase,
   CoordinateGridSolution,
   CoordinateGridRenderedSolution,
-} from "templates/types";
+} from "templates/coordinategrid/types";
 import { iconMap } from "constants/icons";
 
 export const getDefaultIconCoordinates = (

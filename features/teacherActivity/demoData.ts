@@ -1,6 +1,8 @@
+import { StudentSolution } from "templates/coordinategrid/types";
+
 // Votes will likely need to be merged on
 // activityId will be necessary in the longterm
-export const demoData = [
+export const demoData: StudentSolution[] = [
   {
     id: "unique-proposal-id-1",
     studentId: "abc-123",

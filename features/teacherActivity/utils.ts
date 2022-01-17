@@ -1,16 +1,19 @@
 import _ from "lodash";
-import { iconMap } from "constants/icons";
 import {
   getDefaultIconCoordinates,
   getPlacedIconsForSolution,
 } from "templates/coordinategrid/utils";
+import { StudentSolution } from "templates/coordinategrid/types";
 
-export const processCoordinateGridSolutions = (studentSolution, activity) => {
+export const processCoordinateGridSolutions = (
+  studentSolutions: StudentSolution[],
+  activity
+) => {
   const defaultPlacedIcons = getDefaultIconCoordinates(
     activity.projectData.placedIcons
   );
 
-  return studentSolution.map((solution) => {
+  return studentSolutions.map((solution) => {
     return {
       ...solution,
       solution: [
@@ -21,11 +24,23 @@ export const processCoordinateGridSolutions = (studentSolution, activity) => {
   });
 };
 
-export const getTopAndOtherSolutions = (solution, number) => {
-  const sorted = [..._.sortBy(solution, "votes")].reverse();
+export const getTopAndOtherSolutions = (
+  studentSolutions: ReturnType<typeof processCoordinateGridSolutions>,
+  number
+) => {
+  const sorted = [..._.sortBy(studentSolutions, "votes")].reverse();
 
   const topSolutions = sorted.slice(0, number);
   const otherSolutions =
-    solution.length > number ? sorted.slice(number, solution.length) : [];
+    studentSolutions.length > number
+      ? sorted.slice(number, studentSolutions.length)
+      : [];
   return { topSolutions, otherSolutions };
 };
+
+export type TopSolutions = ReturnType<
+  typeof getTopAndOtherSolutions
+>["topSolutions"];
+export type OtherSolutions = ReturnType<
+  typeof getTopAndOtherSolutions
+>["otherSolutions"];
