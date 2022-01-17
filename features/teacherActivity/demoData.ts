@@ -24,7 +24,7 @@ export const demoData = [
       { x: 7, y: 6, iconType: "CELL_TOWER" },
       { x: 8, y: -7, iconType: "CELL_TOWER" },
     ],
-    votes: 0,
+    votes: 1,
   },
 
   {

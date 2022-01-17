@@ -1,26 +1,48 @@
+import { useState } from "react";
 import { Box, Heading } from "@chakra-ui/react";
 import { demoData } from "./demoData";
-import { getTopSolutions } from "features/teacherActivity/utils";
+import { getTopAndOtherSolutions } from "features/teacherActivity/utils";
 import cellTowerActivity from "data/celltower/camden.json";
 import { processCoordinateGridSolutions } from "features/teacherActivity/utils";
-import TopProposals from "features/teacherActivity/components/TopProposals";
+import SolutionArea from "features/teacherActivity/components/SolutionArea";
+
 const TeacherActivityContainer = () => {
+  const [starredSolutions, setStarredSolutions] = useState();
   const projectDataSolutions = processCoordinateGridSolutions(
     demoData,
     cellTowerActivity
   );
 
-  const solutionProps = {
-    solutions: getTopSolutions(projectDataSolutions, 2),
+  const { topSolutions, otherSolutions } = getTopAndOtherSolutions(
+    projectDataSolutions,
+    2
+  );
+
+  const commonProps = {
     isEditable: false,
   };
 
-  console.log({ solutionProps });
+  const topSolutionProps = {
+    ...commonProps,
+    solutions: topSolutions,
+    isEditable: false,
+  };
+
+  const otherSolutionProps = {
+    ...commonProps,
+    solutions: otherSolutions,
+  };
+
+  console.log({ topSolutionProps });
 
   return (
     <Box>
       <Heading>Cell Towers</Heading>
-      <TopProposals solutionProps={solutionProps} />
+      <SolutionArea solutionProps={topSolutionProps} title="Top Proposals" />
+      <SolutionArea
+        solutionProps={otherSolutionProps}
+        title="Other Proposals"
+      />
     </Box>
   );
 };

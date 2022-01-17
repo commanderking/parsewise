@@ -8,7 +8,7 @@ export const processCoordinateGridSolutions = (studentSolution, activity) => {
         ...solution.solution.map((solutionIcon) => ({
           ...solutionIcon,
           image: iconMap[solutionIcon.iconType].src,
-          size: 15,
+          size: 22,
         })),
         ...activity.projectData.placedIcons.map((placedIcon) => ({
           ...placedIcon,
@@ -20,8 +20,11 @@ export const processCoordinateGridSolutions = (studentSolution, activity) => {
   });
 };
 
-export const getTopSolutions = (solution, number) => {
-  const sorted = _.sortBy(solution, "votes");
+export const getTopAndOtherSolutions = (solution, number) => {
+  const sorted = [..._.sortBy(solution, "votes")].reverse();
 
-  return [...sorted].reverse().slice(0, number);
+  const topSolutions = sorted.slice(0, number);
+  const otherSolutions =
+    solution.length > number ? sorted.slice(number, solution.length) : [];
+  return { topSolutions, otherSolutions };
 };
