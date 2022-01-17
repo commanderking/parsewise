@@ -3,7 +3,6 @@ import CoordinateGridSolutionArea from "templates/coordinategrid/components/Coor
 import { ArrowUp } from "react-feather";
 import { TopSolutions } from "features/teacherActivity/utils";
 
-// TODO: Update prop types
 type Props = {
   // As more solution comes in, this may need to be more unions of the different solution types
   solutionProps: {

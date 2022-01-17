@@ -1,9 +1,6 @@
 import { CoordinateGridPhases } from "templates/coordinategrid/constants";
-import {
-  Phase,
-  CoordinateGridSolution,
-  CoordinateGridRenderedSolution,
-} from "templates/coordinategrid/types";
+import { Phase } from "templates/types";
+import { CoordinateGridSolution } from "templates/coordinategrid/types";
 import { iconMap } from "constants/icons";
 
 export const getDefaultIconCoordinates = (
