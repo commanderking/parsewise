@@ -21,4 +21,5 @@ export type StudentSolution = {
   solution: CoordinateGridSolution[];
   // This likely will be removed eventually when real data comes in. We'll need a new type which combiens StudentSolution with votes per that solution
   votes?: number;
+  isStarred?: boolean;
 };
