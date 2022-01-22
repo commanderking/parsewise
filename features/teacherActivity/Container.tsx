@@ -1,45 +1,58 @@
 import { useState } from "react";
 import { Box, Heading } from "@chakra-ui/react";
 import { demoData } from "./demoData";
-import { getTopAndOtherSolutions } from "features/teacherActivity/utils";
+import { formatStudentSolutions } from "features/teacherActivity/utils";
 import cellTowerActivity from "data/celltower/camden.json";
 import { processCoordinateGridSolutions } from "features/teacherActivity/utils";
 import SolutionArea from "features/teacherActivity/components/SolutionArea";
+import ShowcaseArea from "features/teacherActivity/components/ShowcaseArea";
 
 const TeacherActivityContainer = () => {
-  const [starredSolutions, setStarredSolutions] = useState();
+  const [starredSolutionIds, setStarredSolutionIds] = useState<string[]>([]);
   const projectDataSolutions = processCoordinateGridSolutions(
     demoData,
     cellTowerActivity
   );
 
-  const { topSolutions, otherSolutions } = getTopAndOtherSolutions(
+  const studentSolutions = formatStudentSolutions(
     projectDataSolutions,
-    2
+    starredSolutionIds
   );
+
+  const starSolution = (id) => {
+    if (starredSolutionIds.includes(id)) {
+      setStarredSolutionIds(
+        starredSolutionIds.filter((starredId) => starredId !== id)
+      );
+      return;
+    }
+    setStarredSolutionIds([id, ...starredSolutionIds]);
+  };
 
   const commonProps = {
     isEditable: false,
   };
 
-  const topSolutionProps = {
+  const showcaseSolutionProps = {
     ...commonProps,
-    solutions: topSolutions,
-    isEditable: false,
+    solutions: studentSolutions.filter((solution) =>
+      starredSolutionIds.includes(solution.id)
+    ),
   };
 
-  const otherSolutionProps = {
+  const studentSolutionProps = {
     ...commonProps,
-    solutions: otherSolutions,
+    solutions: studentSolutions,
   };
 
   return (
     <Box>
       <Heading>Cell Towers</Heading>
-      <SolutionArea solutionProps={topSolutionProps} title="Top Proposals" />
+      <ShowcaseArea solutionProps={showcaseSolutionProps} />
       <SolutionArea
-        solutionProps={otherSolutionProps}
-        title="Other Proposals"
+        solutionProps={studentSolutionProps}
+        title="Student Solutions"
+        starSolution={starSolution}
       />
     </Box>
   );

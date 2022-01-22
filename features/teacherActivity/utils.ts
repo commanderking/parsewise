@@ -24,23 +24,20 @@ export const processCoordinateGridSolutions = (
   });
 };
 
-export const getTopAndOtherSolutions = (
+// Function ideally remains generic for future cases as well
+export const formatStudentSolutions = (
   studentSolutions: ReturnType<typeof processCoordinateGridSolutions>,
-  number
+  starredSolutions: string[]
 ) => {
-  const sorted = [..._.sortBy(studentSolutions, "votes")].reverse();
+  const solutions = studentSolutions.map((solution) => {
+    return {
+      ...solution,
+      isStarred: starredSolutions.includes(solution.id),
+    };
+  });
+  const sorted = [..._.sortBy(solutions, "votes")].reverse();
 
-  const topSolutions = sorted.slice(0, number);
-  const otherSolutions =
-    studentSolutions.length > number
-      ? sorted.slice(number, studentSolutions.length)
-      : [];
-  return { topSolutions, otherSolutions };
+  return sorted;
 };
 
-export type TopSolutions = ReturnType<
-  typeof getTopAndOtherSolutions
->["topSolutions"];
-export type OtherSolutions = ReturnType<
-  typeof getTopAndOtherSolutions
->["otherSolutions"];
+export type StudentSolutions = ReturnType<typeof formatStudentSolutions>;
