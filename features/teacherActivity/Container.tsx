@@ -51,7 +51,7 @@ const TeacherActivityContainer = () => {
       <ShowcaseArea solutionProps={showcaseSolutionProps} />
       <SolutionArea
         solutionProps={studentSolutionProps}
-        title="Student Solutions"
+        title="All Student Solutions"
         starSolution={starSolution}
       />
     </Box>
