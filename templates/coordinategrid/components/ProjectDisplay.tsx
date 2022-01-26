@@ -35,16 +35,12 @@ const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
 
       <Box mt={8}>
         <PhaseCompletionPrompt data={data} currentPhase={currentPhase} />
-        {currentPhase === CoordinateGridPhases.PREDICTION && (
-          <ProjectDescription data={data} />
-        )}
+        <ProjectDescription data={data} />
       </Box>
 
       <Box
+        width="100%"
         padding={8}
-        mt={8}
-        ml={20}
-        mr={20}
         textAlign="center"
         border="1px solid lightgray"
       >

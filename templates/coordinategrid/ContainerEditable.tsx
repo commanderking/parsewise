@@ -83,7 +83,7 @@ const CoordinateGridContainer = ({ data }) => {
         />
       </Box>
       <Box mt={8}>
-        <Heading size="lg">Overview</Heading>
+        <Heading size="lg">Problem Overview</Heading>
         <Box border="1px solid" borderColor="gray.200" pl={4} pr={4}>
           <Editor
             editorState={editorState}
