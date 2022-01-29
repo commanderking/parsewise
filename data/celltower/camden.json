@@ -68,11 +68,12 @@
       "solutionPrompt": "What are your initial thoughts?"
     },
     "FIRST_PROPOSAL": {
-      "instructions": "Thanks for sharing your initial thoughts! As a next step, review some of the skills that might help you improve on your initial proposal. When you're ready, submit your first proposal. Don't worry about getting it perfect. You'll have the chance to modify it!",
-      "solutionPrompt": "What are your initial thoughts?"
+      "instructions": "Thanks for sharing your initial thoughts! As a next step, review some of the skills that might help you improve on your initial proposal. When you're ready, submit your first proposal.",
+      "solutionPrompt": "Your Current Proposal"
     },
     "MODIFY_PROPOSAL": {
-      "instructions": "Your peers and members of the community have also submitted proposals. Help review them to see whether they're on the right track. They might also give you ideas for how to improve your own proposal."
+      "instructions": "Your peers and members of the community have also submitted proposals. Help review them to see whether they're on the right track. They might also give you ideas for how to improve your own proposal.",
+      "solutionPrompt": "Your Current Proposal"
     },
     "FINAL_SOLUTION": {
       "solutionPrompt": "FINAL SOLUTION PROPOSAL"

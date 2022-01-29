@@ -44,7 +44,9 @@ const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
         textAlign="center"
         border="1px solid lightgray"
       >
-        <SolutionAreaDescription currentPhase={currentPhase} />
+        <SolutionAreaDescription
+          solutionPrompt={data.phaseContent[currentPhase].solutionPrompt}
+        />
         <CoordinateGridSolutionArea
           isEditable={currentPhase === CoordinateGridPhases.PREDICTION}
           initialIcons={allIcons}

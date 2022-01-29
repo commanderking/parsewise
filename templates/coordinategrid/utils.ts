@@ -33,16 +33,20 @@ export const getPlacedIconCoordinates = (userSolutions) => {
   return getPlacedIconsForSolution(userSolutions[0]?.solution || []);
 };
 
-export const getCurrentPhase = (solutions): Phase => {
-  if (!solutions.length) {
-    return CoordinateGridPhases.PREDICTION;
+export const getCurrentPhase = (activityId): Phase => {
+  const phase = localStorage.getItem(`${activityId}-phase`) as Phase;
+
+  if (phase) {
+    return phase;
   }
 
-  if (solutions.length === 1) {
-    return CoordinateGridPhases.FIRST_PROPOSAL;
-  }
+  return CoordinateGridPhases.PREDICTION;
+};
 
-  if (solutions.length >= 2) {
-    return CoordinateGridPhases.MODIFY_PROPOSAL;
-  }
+export const getNextPhase = (currentPhase) => {
+  const phases = Object.keys(CoordinateGridPhases);
+  const currentPhaseIndex = phases.findIndex((phase) => phase === currentPhase);
+  const nextPhase = phases[currentPhaseIndex + 1];
+
+  return nextPhase;
 };

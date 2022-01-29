@@ -1,9 +1,11 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
 import { CoordinateGrid } from "open-math-tools";
 import { useState } from "react";
 import _ from "lodash";
 import { ProposalSubmitButton } from "templates/coordinategrid/components/ProposalSubmitButton";
 import { Phase } from "templates/types";
+import { CoordinateGridPhases } from "templates/coordinategrid/constants";
+import { getNextPhase } from "templates/coordinategrid/utils";
 
 const CoordinateGridActions = {
   ADD_ICON: "ADD_ICON",
@@ -82,13 +84,21 @@ const CoordinateGridSolutionArea = ({
           {...getAddableIconProp(isEditable)}
         />
       </Box>
-      {onOpen && currentPhase && (
-        <ProposalSubmitButton
-          addedIcons={addedIcons}
-          currentPhase={currentPhase}
-          onOpen={onOpen}
-        />
-      )}
+      <Box display="flex" justifyContent="center">
+        {(currentPhase === CoordinateGridPhases.FIRST_PROPOSAL ||
+          currentPhase === CoordinateGridPhases.MODIFY_PROPOSAL) && (
+          <Button mr={4} onClick={onOpen}>
+            Edit
+          </Button>
+        )}
+        {onOpen && currentPhase && (
+          <ProposalSubmitButton
+            addedIcons={addedIcons}
+            currentPhase={currentPhase}
+            nextPhase={getNextPhase(currentPhase)}
+          />
+        )}
+      </Box>
     </Box>
   );
 };

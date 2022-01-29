@@ -1,4 +1,20 @@
-export const submitProposal = ({ projectId, activity, addedIcons }) => {
+import { Phase } from "templates/types";
+
+type ProposalProps = {
+  projectId: string | string[];
+  activity: any[];
+  addedIcons: any[]; // TODO: update types
+  phase?: Phase;
+  reload?: boolean;
+};
+
+export const submitProposal = ({
+  projectId,
+  activity,
+  addedIcons,
+  phase,
+  reload = true,
+}: ProposalProps) => {
   const solution = {
     projectId,
     solution: addedIcons,
@@ -10,11 +26,17 @@ export const submitProposal = ({ projectId, activity, addedIcons }) => {
     window.localStorage.setItem(
       "solutions",
       JSON.stringify([
-        ...(JSON.parse(window.localStorage.getItem("solutions")) || []),
         solution,
+        ...(JSON.parse(window.localStorage.getItem("solutions")) || []),
       ])
     );
+
+    if (phase) {
+      window.localStorage.setItem(`${projectId}-phase`, phase);
+    }
+
     location.reload();
+    // window.scrollTo(0, 0);
   }
 };
 

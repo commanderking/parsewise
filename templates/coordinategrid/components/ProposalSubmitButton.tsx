@@ -9,31 +9,36 @@ const getSubmitButtonText = (currentPhase) => {
     return "Submit Prediction";
   }
 
-  if (currentPhase === CoordinateGridPhases.FIRST_PROPOSAL) {
-    return "Edit";
+  if (currentPhase === CoordinateGridPhases.MODIFY_PROPOSAL) {
+    return "Finalize Proposal";
   }
 
-  return "Edit";
+  return "Submit Proposal";
 };
 
-const getOnClick = (addedIcons, currentPhase, projectId, onOpen) => {
-  if (currentPhase !== "PREDICTION") {
-    return onOpen;
-  }
-
+const getOnClick = (addedIcons, projectId, nextPhase) => {
   return () => {
-    submitProposal({ addedIcons, activity: [], projectId });
+    submitProposal({
+      addedIcons,
+      activity: [],
+      projectId,
+      phase: nextPhase,
+    });
   };
 };
 
-export const ProposalSubmitButton = ({ addedIcons, currentPhase, onOpen }) => {
+export const ProposalSubmitButton = ({
+  addedIcons,
+  currentPhase,
+  nextPhase,
+}) => {
   const router = useRouter();
   const { projectId } = router.query;
   return (
     <Box>
       <Button
         colorScheme="teal"
-        onClick={getOnClick(addedIcons, currentPhase, projectId, onOpen)}
+        onClick={getOnClick(addedIcons, projectId, nextPhase)}
       >
         {getSubmitButtonText(currentPhase)}
       </Button>
