@@ -33,6 +33,7 @@ export const getPlacedIconCoordinates = (userSolutions) => {
   return getPlacedIconsForSolution(userSolutions[0]?.solution || []);
 };
 
+// Grab from local storage for now - later, this will likely be persisted on as part of the activity
 export const getCurrentPhase = (activityId): Phase => {
   const phase = localStorage.getItem(`${activityId}-phase`) as Phase;
 
