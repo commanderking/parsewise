@@ -1,25 +1,14 @@
 import { Box, Heading } from "@chakra-ui/react";
-import { Phase } from "templates/types";
-import { CoordinateGridPhases } from "templates/coordinategrid/constants";
 type Props = {
-  currentPhase: Phase;
+  solutionPrompt: string;
 };
 
-const { PREDICTION, FIRST_PROPOSAL, MODIFY_PROPOSAL } = CoordinateGridPhases;
 const fontSize = "2xl";
 
-export const SolutionAreaDescription = ({ currentPhase }: Props) => {
+export const SolutionAreaDescription = ({ solutionPrompt }: Props) => {
   return (
     <Box>
-      {currentPhase === PREDICTION && (
-        <Heading fontSize={fontSize}>What are your initial thoughts?</Heading>
-      )}
-      {currentPhase === FIRST_PROPOSAL && (
-        <Heading fontSize={fontSize}>Your Current Prediction</Heading>
-      )}
-      {currentPhase === MODIFY_PROPOSAL && (
-        <Heading fontSize={fontSize}>Your Current Proposal</Heading>
-      )}
+      <Heading fontSize={fontSize}>{solutionPrompt}</Heading>
     </Box>
   );
 };

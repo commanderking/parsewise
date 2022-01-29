@@ -72,7 +72,7 @@ const CoordinateGridContainer = ({ data }) => {
   };
 
   return (
-    <Box maxWidth={824} margin="auto" mb={150}>
+    <Box maxWidth={1024} margin="auto" mb={150}>
       <Box mt={8}>
         <Heading size="lg">Project Name</Heading>
         <Textarea
@@ -83,7 +83,7 @@ const CoordinateGridContainer = ({ data }) => {
         />
       </Box>
       <Box mt={8}>
-        <Heading size="lg">Overview</Heading>
+        <Heading size="lg">Problem Overview</Heading>
         <Box border="1px solid" borderColor="gray.200" pl={4} pr={4}>
           <Editor
             editorState={editorState}

@@ -32,6 +32,7 @@ const ModifyProposalModal = ({
         <ModalBody>
           <ModifyProposalGrid
             mostRecentSolutionCoordinates={mostRecentSolutionCoordinates}
+            onClose={onClose}
           />
         </ModalBody>
       </ModalContent>

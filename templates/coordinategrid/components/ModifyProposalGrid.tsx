@@ -4,6 +4,7 @@ import { useState } from "react";
 import _ from "lodash";
 import { submitProposal } from "templates/coordinategrid/requests";
 import { useRouter } from "next/router";
+import { CoordinateGridPhases } from "templates/coordinategrid/constants";
 
 const CoordinateGridActions = {
   ADD_ICON: "ADD_ICON",
@@ -13,6 +14,7 @@ const CoordinateGridActions = {
 const ModifyProposalGrid = ({
   mostRecentSolutionCoordinates,
   customButton = null,
+  onClose,
 }) => {
   const router = useRouter();
   const { projectId } = router.query;
@@ -20,7 +22,6 @@ const ModifyProposalGrid = ({
   const [activeIcons, setActiveIcons] = useState(mostRecentSolutionCoordinates);
   const [activity, setActivity] = useState([]);
 
-  console.log("activeIcons", activeIcons);
   const handleIconClick = (icon) => {
     if (!icon.canRemove) {
       return;
@@ -82,11 +83,13 @@ const ModifyProposalGrid = ({
                 addedIcons: activeIcons.filter((icon) => icon.canRemove),
                 activity,
                 projectId,
+                reload: false,
+                // phase: CoordinateGridPhases.MODIFY_PROPOSAL,
               });
             }}
             colorScheme="teal"
           >
-            Submit
+            Save Changes
           </Button>
         </Box>
       )}

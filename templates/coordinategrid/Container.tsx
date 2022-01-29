@@ -16,7 +16,7 @@ const CoordinateGridContainer = ({ data }) => {
     (window && JSON.parse(window.localStorage.getItem("solutions"))) || [];
   const [userSolutions, setSolutions] = useState(submittedSolutions);
 
-  const currentPhase = getCurrentPhase(userSolutions);
+  const currentPhase = getCurrentPhase(data.id);
 
   const projectDefaultCoordinates = getDefaultIconCoordinates(
     data.projectData.placedIcons

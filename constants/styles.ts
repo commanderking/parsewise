@@ -1,1 +1,1 @@
-export const projectContainerWidth = 824;
+export const projectContainerWidth = 1024;
