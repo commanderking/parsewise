@@ -93,6 +93,7 @@ const CoordinateGridSolutionArea = ({
         )}
         {onOpen && currentPhase && (
           <ProposalSubmitButton
+            isDisabled={!Boolean(addedIcons.length)}
             addedIcons={addedIcons}
             currentPhase={currentPhase}
             nextPhase={getNextPhase(currentPhase)}
