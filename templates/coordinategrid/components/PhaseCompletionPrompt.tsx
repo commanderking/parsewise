@@ -7,7 +7,7 @@ export const PhaseCompletionPrompt = ({ data, currentPhase }) => {
   }
 
   return (
-    <Alert status="info">
+    <Alert status="info" mb={8}>
       <AlertIcon />
       {data.phaseContent[currentPhase].instructions}
     </Alert>

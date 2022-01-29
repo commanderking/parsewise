@@ -1,7 +1,7 @@
 import { Box, Button } from "@chakra-ui/react";
 import { submitProposal } from "templates/coordinategrid/requests";
 import { CoordinateGridPhases } from "templates/coordinategrid/constants";
-
+import { Phase } from "templates/types";
 import { useRouter } from "next/router";
 
 const getSubmitButtonText = (currentPhase) => {
@@ -27,16 +27,25 @@ const getOnClick = (addedIcons, projectId, nextPhase) => {
   };
 };
 
+type Props = {
+  addedIcons: any[];
+  currentPhase: Phase;
+  nextPhase: Phase;
+  isDisabled: boolean;
+};
+
 export const ProposalSubmitButton = ({
   addedIcons,
   currentPhase,
   nextPhase,
-}) => {
+  isDisabled,
+}: Props) => {
   const router = useRouter();
   const { projectId } = router.query;
   return (
     <Box>
       <Button
+        isDisabled={isDisabled}
         colorScheme="teal"
         onClick={getOnClick(addedIcons, projectId, nextPhase)}
       >

@@ -44,10 +44,10 @@ export const getCurrentPhase = (activityId): Phase => {
   return CoordinateGridPhases.PREDICTION;
 };
 
-export const getNextPhase = (currentPhase) => {
+export const getNextPhase = (currentPhase: Phase): Phase => {
   const phases = Object.keys(CoordinateGridPhases);
   const currentPhaseIndex = phases.findIndex((phase) => phase === currentPhase);
-  const nextPhase = phases[currentPhaseIndex + 1];
+  const nextPhase = phases[currentPhaseIndex + 1] as Phase;
 
   return nextPhase;
 };

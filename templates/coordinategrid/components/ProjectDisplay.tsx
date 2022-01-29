@@ -1,4 +1,4 @@
-import { Box, Heading, useDisclosure } from "@chakra-ui/react";
+import { Box, Heading, useDisclosure, Text } from "@chakra-ui/react";
 import CoordinateGridSolutionArea from "templates/coordinategrid/components/CoordinateGridSolutionArea";
 import SolutionAreaDescription from "templates/coordinategrid/components/SolutionAreaDescription";
 import {
@@ -34,7 +34,6 @@ const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
       </Box>
 
       <Box mt={8}>
-        <PhaseCompletionPrompt data={data} currentPhase={currentPhase} />
         <ProjectDescription data={data} />
       </Box>
 
@@ -44,9 +43,17 @@ const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
         textAlign="center"
         border="1px solid lightgray"
       >
+        <PhaseCompletionPrompt data={data} currentPhase={currentPhase} />
+
         <SolutionAreaDescription
           solutionPrompt={data.phaseContent[currentPhase].solutionPrompt}
         />
+        {data.phaseContent[currentPhase].solutionPromptHelper && (
+          <Text as="i">
+            {data.phaseContent[currentPhase].solutionPromptHelper}
+          </Text>
+        )}
+
         <CoordinateGridSolutionArea
           isEditable={currentPhase === CoordinateGridPhases.PREDICTION}
           initialIcons={allIcons}

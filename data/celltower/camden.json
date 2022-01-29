@@ -65,15 +65,18 @@
       "instructions": ""
     },
     "PREDICTION": {
-      "solutionPrompt": "What are your initial thoughts?"
+      "solutionPrompt": "What are your initial thoughts?",
+      "solutionPromptHelper": "Click a coordinate to place a cell tower."
     },
     "FIRST_PROPOSAL": {
       "instructions": "Thanks for sharing your initial thoughts! As a next step, review some of the skills that might help you improve on your initial proposal. When you're ready, submit your first proposal.",
-      "solutionPrompt": "Your Current Proposal"
+      "solutionPrompt": "Your Current Proposal",
+      "solutionPromptHelper": "Edit and submit your proposal."
     },
     "MODIFY_PROPOSAL": {
       "instructions": "Your peers and members of the community have also submitted proposals. Help review them to see whether they're on the right track. They might also give you ideas for how to improve your own proposal.",
-      "solutionPrompt": "Your Current Proposal"
+      "solutionPrompt": "Your Current Proposal",
+      "solutionPromptHelper": "Edit and finalize your proposal."
     },
     "FINAL_SOLUTION": {
       "solutionPrompt": "FINAL SOLUTION PROPOSAL"
