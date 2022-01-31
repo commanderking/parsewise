@@ -35,7 +35,9 @@ export const submitProposal = ({
       window.localStorage.setItem(`${projectId}-phase`, phase);
     }
 
-    location.reload();
+    if (reload) {
+      location.reload();
+    }
   }
 };
 

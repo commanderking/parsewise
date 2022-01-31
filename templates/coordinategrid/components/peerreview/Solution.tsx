@@ -27,6 +27,7 @@ const Solution = ({
   review,
   upvote,
   giveFeedback,
+  reviewNext,
 }) => {
   const router = useRouter();
   const { projectId, studentId } = router.query;
@@ -36,14 +37,6 @@ const Solution = ({
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const { id } = proposedSolution;
-
-  const onReactionClick = (event) => {
-    const reactionId = event.target.value;
-    setReactions({
-      ...reactions,
-      [reactionId]: !reactions[reactionId],
-    });
-  };
 
   const handleCommentChange = (e) => {
     setComment(e.target.value);
@@ -64,7 +57,7 @@ const Solution = ({
           margin="auto"
           mb={8}
         />
-        <Button>Review Another Proposal</Button>
+        <Button onClick={() => reviewNext()}>Review Another Proposal</Button>
       </Box>
     );
   }

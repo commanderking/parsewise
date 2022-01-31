@@ -41,6 +41,16 @@ const PeerProposalReview = ({ projectDefaultCoordinates }) => {
     });
   };
 
+  const reviewNext = () => {
+    if (currentProposalIndex + 1 === solutions.length) {
+      return;
+    }
+    setCurrentProposalIndex(currentProposalIndex + 1);
+  };
+
+  console.log({ currentProposalIndex });
+  console.log(solutions.length);
+
   if (!data) {
     return <div>Loading Proposals</div>;
   }
@@ -61,6 +71,7 @@ const PeerProposalReview = ({ projectDefaultCoordinates }) => {
           review={reviews[proposedSolution.id]}
           upvote={upvote}
           giveFeedback={giveFeedback}
+          reviewNext={reviewNext}
         />
       </Box>
     </Box>

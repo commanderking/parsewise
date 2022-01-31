@@ -86,6 +86,8 @@ const ModifyProposalGrid = ({
                 reload: false,
                 // phase: CoordinateGridPhases.MODIFY_PROPOSAL,
               });
+
+              onClose();
             }}
             colorScheme="teal"
           >
