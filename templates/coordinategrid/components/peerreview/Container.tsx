@@ -19,6 +19,7 @@ const PeerProposalReview = ({ projectDefaultCoordinates }) => {
 
   const solutions = getPeerReviewSolutions(data);
   const [reviews, setReviews] = useState<{ [id: string]: Review }>({});
+  const [currentProposalIndex, setCurrentProposalIndex] = useState(0);
 
   const upvote = (id: string) => {
     setReviews({
@@ -40,33 +41,28 @@ const PeerProposalReview = ({ projectDefaultCoordinates }) => {
     });
   };
 
-  console.log({ reviews });
-
   if (!data) {
     return <div>Loading Proposals</div>;
   }
+
+  const proposedSolution = solutions[currentProposalIndex];
+
+  const allPlacedCoordinates = [
+    ...projectDefaultCoordinates,
+    ...getPlacedIconsForSolution(proposedSolution.solution),
+  ];
+
   return (
     <Box textAlign="center">
-      {solutions.map((proposedSolution, index) => {
-        const allPlacedCoordinates = [
-          ...projectDefaultCoordinates,
-          ...getPlacedIconsForSolution(proposedSolution.solution),
-        ];
-
-        console.log("proposed id", reviews[proposedSolution.id]);
-
-        return (
-          <Box key={proposedSolution.id}>
-            <Solution
-              proposedSolution={proposedSolution}
-              allPlacedCoordinates={allPlacedCoordinates}
-              review={reviews[proposedSolution.id]}
-              upvote={upvote}
-              giveFeedback={giveFeedback}
-            />
-          </Box>
-        );
-      })}
+      <Box key={proposedSolution.id}>
+        <Solution
+          proposedSolution={proposedSolution}
+          allPlacedCoordinates={allPlacedCoordinates}
+          review={reviews[proposedSolution.id]}
+          upvote={upvote}
+          giveFeedback={giveFeedback}
+        />
+      </Box>
     </Box>
   );
 };

@@ -37,8 +37,6 @@ const Solution = ({
 
   const { id } = proposedSolution;
 
-  console.log({ proposedSolution });
-
   const onReactionClick = (event) => {
     const reactionId = event.target.value;
     setReactions({
@@ -53,16 +51,23 @@ const Solution = ({
 
   if (hasSubmitted) {
     return (
-      <Box textAlign="center" padding={16}>
+      <Box textAlign="center">
         <Heading fontSize="2xl" mb={8}>
           Feedback Submitted
         </Heading>
-        <CheckCircleIcon size="xl" w={16} h={16} color="teal" />
+        <CheckCircleIcon
+          size="xl"
+          w={16}
+          h={16}
+          color="teal"
+          display="block"
+          margin="auto"
+          mb={8}
+        />
+        <Button>Review Another Proposal</Button>
       </Box>
     );
   }
-
-  console.log(review && review[id]);
 
   const isUpvoted = review && review.isUpvoted;
   const upvotedColor = isUpvoted ? "#00CC00" : "black";
@@ -77,7 +82,7 @@ const Solution = ({
         margin="auto"
       />
 
-      <Box display="inline-flex" alignItems="center">
+      <Box display="inline-flex" alignItems="center" mb={2}>
         <Box
           display="flex"
           alignItems="center"
@@ -122,7 +127,7 @@ const Solution = ({
           }, 500);
         }}
       >
-        Submit
+        Submit Feedback
       </Button>
     </Box>
   );
