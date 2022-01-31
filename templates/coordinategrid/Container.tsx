@@ -17,10 +17,6 @@ const CoordinateGridContainer = ({ data }) => {
 
   const currentPhase = getCurrentPhase(data.id);
 
-  const projectDefaultCoordinates = getDefaultIconCoordinates(
-    data.projectData.placedIcons
-  );
-
   return (
     <Box maxWidth={projectContainerWidth} margin="auto">
       <Box mt={8}>

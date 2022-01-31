@@ -4,22 +4,11 @@ import { useRouter } from "next/router";
 import { Box, Button, Heading, Text } from "@chakra-ui/react";
 import { CheckCircleIcon } from "@chakra-ui/icons";
 import CoordinateGridSolutionArea from "templates/coordinategrid/components/CoordinateGridSolutionArea";
-import PeerReviewReactions from "components/reactions/PeerReviewReactions";
 import Comment from "templates/coordinategrid/components/peerreview/Comment";
 import { useState } from "react";
 import { reactionIds } from "components/reactions/constants";
 import { submitFeedback } from "templates/coordinategrid/requests";
 import { ArrowUp } from "react-feather";
-
-const initialReactionStates = reactionIds.reduce(
-  (reactions, currentReaction) => {
-    return {
-      ...reactions,
-      [currentReaction]: false,
-    };
-  },
-  {}
-);
 
 const Solution = ({
   allPlacedCoordinates,
@@ -32,7 +21,6 @@ const Solution = ({
   const router = useRouter();
   const { projectId, studentId } = router.query;
 
-  const [reactions, setReactions] = useState(initialReactionStates);
   const [comment, setComment] = useState("");
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
@@ -64,8 +52,6 @@ const Solution = ({
 
   const isUpvoted = review && review.isUpvoted;
   const upvotedColor = isUpvoted ? "#00CC00" : "black";
-
-  console.log({ comment });
 
   return (
     <Box textAlign="center">
@@ -117,7 +103,6 @@ const Solution = ({
               projectId,
               proposalId: proposedSolution.id,
               comment,
-              reactions: _.pickBy(reactions, Boolean),
             });
             setHasSubmitted(true);
           }, 500);

@@ -31,9 +31,10 @@ const Editor = dynamic(
 
 const CoordinateGridContainer = ({ data }) => {
   const [name, setName] = useState(data.name);
+  console.log({ data });
 
   const [placeableIcon, setPlaceableIcon] = useState(
-    data.projectData.addableIcon.iconType
+    data.projectData?.addableIcon?.iconType
   );
 
   const [activeIcons, setActiveIcons] = useState(

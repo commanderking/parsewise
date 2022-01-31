@@ -48,9 +48,6 @@ const PeerProposalReview = ({ projectDefaultCoordinates }) => {
     setCurrentProposalIndex(currentProposalIndex + 1);
   };
 
-  console.log({ currentProposalIndex });
-  console.log(solutions.length);
-
   if (!data) {
     return <div>Loading Proposals</div>;
   }

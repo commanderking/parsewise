@@ -1,5 +1,4 @@
-import { Box, Heading, useDisclosure, Text, Grid } from "@chakra-ui/react";
-import CoordinateGridSolutionArea from "templates/coordinategrid/components/CoordinateGridSolutionArea";
+import { Box, Heading, Text, Grid } from "@chakra-ui/react";
 import SolutionAreaDescription from "templates/coordinategrid/components/SolutionAreaDescription";
 import {
   getDefaultIconCoordinates,
@@ -8,7 +7,6 @@ import {
 import { CoordinateGridPhases } from "templates/coordinategrid/constants";
 import ProjectDescription from "templates/coordinategrid/components/ProjectDescription";
 import PhaseCompletionPrompt from "templates/coordinategrid/components/PhaseCompletionPrompt";
-import ModifyProposalModal from "templates/coordinategrid/components/ModifyProposalModal";
 import PeerReview from "templates/coordinategrid/components/peerreview/Container";
 import ModifyProposalGrid from "templates/coordinategrid/components/ModifyProposalGrid";
 type Props = {
@@ -18,7 +16,6 @@ type Props = {
 };
 
 const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const mostRecentSolutionCoordinates = getPlacedIconCoordinates(userSolutions);
   const projectDefaultCoordinates = getDefaultIconCoordinates(
     data.projectData.placedIcons
@@ -62,13 +59,6 @@ const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
             <PeerReview projectDefaultCoordinates={projectDefaultCoordinates} />
           )}
         </Grid>
-
-        {/* <ModifyProposalModal
-          isOpen={isOpen}
-          currentPhase={currentPhase}
-          onClose={onClose}
-          mostRecentSolutionCoordinates={allIcons}
-        /> */}
       </Box>
     </Box>
   );
