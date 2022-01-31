@@ -10,7 +10,7 @@ import ProjectDescription from "templates/coordinategrid/components/ProjectDescr
 import PhaseCompletionPrompt from "templates/coordinategrid/components/PhaseCompletionPrompt";
 import ModifyProposalModal from "templates/coordinategrid/components/ModifyProposalModal";
 import PeerReview from "templates/coordinategrid/components/peerreview/Container";
-
+import ModifyProposalGrid from "templates/coordinategrid/components/ModifyProposalGrid";
 type Props = {
   data: any;
   currentPhase: any;
@@ -51,14 +51,11 @@ const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
                 {data.phaseContent[currentPhase].solutionPromptHelper}
               </Text>
             )}
-            <CoordinateGridSolutionArea
-              isEditable={currentPhase === CoordinateGridPhases.PREDICTION}
-              initialIcons={allIcons}
-              initialAddedIcons={mostRecentSolutionCoordinates}
+            <ModifyProposalGrid
+              mostRecentSolutionCoordinates={allIcons}
+              isEditable={currentPhase !== CoordinateGridPhases.FINAL_SOLUTION}
               currentPhase={currentPhase}
-              onOpen={onOpen}
-              margin={"auto"}
-            />{" "}
+            />
           </Box>
 
           {currentPhase === CoordinateGridPhases.MODIFY_PROPOSAL && (
@@ -66,12 +63,12 @@ const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
           )}
         </Grid>
 
-        <ModifyProposalModal
+        {/* <ModifyProposalModal
           isOpen={isOpen}
           currentPhase={currentPhase}
           onClose={onClose}
           mostRecentSolutionCoordinates={allIcons}
-        />
+        /> */}
       </Box>
     </Box>
   );

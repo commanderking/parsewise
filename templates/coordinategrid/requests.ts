@@ -46,7 +46,6 @@ export const submitFeedback = ({
   studentId,
   proposalId,
   comment,
-  reactions,
   proposerStudentId,
 }) => {
   if (window) {
@@ -56,7 +55,6 @@ export const submitFeedback = ({
       proposerStudentId,
       proposalId,
       comment,
-      reactions,
     };
     window.localStorage.setItem(
       "feedback",

@@ -79,7 +79,9 @@
       "solutionPromptHelper": "Edit and finalize your proposal."
     },
     "FINAL_SOLUTION": {
-      "solutionPrompt": "FINAL SOLUTION PROPOSAL"
+      "solutionPrompt": "Final Proposal",
+      "instructions": "Thanks for submitting your final proposal!",
+      "solutionPromptHelper": "All set!"
     }
   },
   "resources": [

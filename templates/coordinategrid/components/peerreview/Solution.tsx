@@ -33,7 +33,7 @@ const Solution = ({
   const { projectId, studentId } = router.query;
 
   const [reactions, setReactions] = useState(initialReactionStates);
-  const [comment, setComment] = useState([]);
+  const [comment, setComment] = useState("");
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const { id } = proposedSolution;
@@ -64,6 +64,8 @@ const Solution = ({
 
   const isUpvoted = review && review.isUpvoted;
   const upvotedColor = isUpvoted ? "#00CC00" : "black";
+
+  console.log({ comment });
 
   return (
     <Box textAlign="center">
@@ -104,6 +106,7 @@ const Solution = ({
       <Comment comment={comment} handleCommentChange={handleCommentChange} />
       <Button
         colorScheme="teal"
+        isDisabled={!Boolean(comment.trim())}
         onClick={() => {
           // Mimic call
           setTimeout(() => {
