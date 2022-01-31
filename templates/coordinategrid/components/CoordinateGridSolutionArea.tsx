@@ -4,7 +4,10 @@ import { useState } from "react";
 import _ from "lodash";
 import { ProposalSubmitButton } from "templates/coordinategrid/components/ProposalSubmitButton";
 import { Phase } from "templates/types";
-import { CoordinateGridPhases } from "templates/coordinategrid/constants";
+import {
+  CoordinateGridPhases,
+  gridDimension,
+} from "templates/coordinategrid/constants";
 import { getNextPhase } from "templates/coordinategrid/utils";
 
 const CoordinateGridActions = {
@@ -74,11 +77,11 @@ const CoordinateGridSolutionArea = ({
 
   return (
     <Box>
-      <Box width={400} margin={margin}>
+      <Box width={gridDimension} margin={margin}>
         <CoordinateGrid
           id="coordinate grid"
-          gridHeight={400}
-          gridWidth={400}
+          gridHeight={gridDimension}
+          gridWidth={gridDimension}
           initialIcons={initialIcons}
           onIconClick={isEditable ? handleIconClick : () => {}}
           {...getAddableIconProp(isEditable)}

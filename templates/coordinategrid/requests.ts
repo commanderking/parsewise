@@ -35,7 +35,9 @@ export const submitProposal = ({
       window.localStorage.setItem(`${projectId}-phase`, phase);
     }
 
-    location.reload();
+    if (reload) {
+      location.reload();
+    }
   }
 };
 
@@ -44,7 +46,6 @@ export const submitFeedback = ({
   studentId,
   proposalId,
   comment,
-  reactions,
   proposerStudentId,
 }) => {
   if (window) {
@@ -54,7 +55,6 @@ export const submitFeedback = ({
       proposerStudentId,
       proposalId,
       comment,
-      reactions,
     };
     window.localStorage.setItem(
       "feedback",

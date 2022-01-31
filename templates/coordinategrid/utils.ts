@@ -2,6 +2,10 @@ import { CoordinateGridPhases } from "templates/coordinategrid/constants";
 import { Phase } from "templates/types";
 import { CoordinateGridSolution } from "templates/coordinategrid/types";
 import { iconMap } from "constants/icons";
+import {
+  StudentSolution,
+  PeerReviewSolution,
+} from "templates/coordinategrid/types";
 
 export const getDefaultIconCoordinates = (
   solutionCoordinates: CoordinateGridSolution[]
@@ -50,4 +54,19 @@ export const getNextPhase = (currentPhase: Phase): Phase => {
   const nextPhase = phases[currentPhaseIndex + 1] as Phase;
 
   return nextPhase;
+};
+
+export const getPeerReviewSolutions = (
+  solutions: StudentSolution[]
+): PeerReviewSolution[] => {
+  if (!solutions) {
+    return [];
+  }
+  return solutions.map((solution) => {
+    return {
+      ...solution,
+      isUpvoted: false,
+      feedback: null,
+    };
+  });
 };

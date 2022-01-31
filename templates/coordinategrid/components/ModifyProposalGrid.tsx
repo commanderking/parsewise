@@ -2,9 +2,9 @@ import { Box, Button } from "@chakra-ui/react";
 import { CoordinateGrid } from "open-math-tools";
 import { useState } from "react";
 import _ from "lodash";
-import { submitProposal } from "templates/coordinategrid/requests";
 import { useRouter } from "next/router";
-import { CoordinateGridPhases } from "templates/coordinategrid/constants";
+import { ProposalSubmitButton } from "templates/coordinategrid/components/ProposalSubmitButton";
+import { getNextPhase } from "templates/coordinategrid/utils";
 
 const CoordinateGridActions = {
   ADD_ICON: "ADD_ICON",
@@ -14,7 +14,8 @@ const CoordinateGridActions = {
 const ModifyProposalGrid = ({
   mostRecentSolutionCoordinates,
   customButton = null,
-  onClose,
+  isEditable = true,
+  currentPhase,
 }) => {
   const router = useRouter();
   const { projectId } = router.query;
@@ -39,6 +40,38 @@ const ModifyProposalGrid = ({
     ]);
   };
 
+  const getAddableIconProp = (isEditable: boolean) => {
+    if (!isEditable) {
+      return null;
+    }
+
+    return {
+      addableIcon: {
+        // These don't matter when using activeIcons (so need to edit library)
+        image: "/cell-tower.svg",
+        size: 20,
+        onAddIcon: (icon) => {
+          const { x, y } = icon;
+
+          const addedIconInfo = {
+            x,
+            y,
+            image: "/cell-tower.svg",
+            size: 20,
+            timestamp: Date.now(),
+            canRemove: true,
+          };
+
+          setActiveIcons([...activeIcons, addedIconInfo]);
+          setActivity([
+            ...activity,
+            { ...addedIconInfo, type: CoordinateGridActions.ADD_ICON },
+          ]);
+        },
+      },
+    };
+  };
+
   return (
     <Box>
       <Box width={400} margin="auto">
@@ -47,51 +80,17 @@ const ModifyProposalGrid = ({
           gridHeight={400}
           gridWidth={400}
           activeIcons={activeIcons}
-          onIconClick={handleIconClick}
-          addableIcon={{
-            // These don't matter when using activeIcons (so need to edit library)
-            image: "/cell-tower.svg",
-            size: 20,
-            onAddIcon: (icon) => {
-              const { x, y } = icon;
-
-              const addedIconInfo = {
-                x,
-                y,
-                image: "/cell-tower.svg",
-                size: 20,
-                timestamp: Date.now(),
-                canRemove: true,
-              };
-
-              setActiveIcons([...activeIcons, addedIconInfo]);
-              setActivity([
-                ...activity,
-                { ...addedIconInfo, type: CoordinateGridActions.ADD_ICON },
-              ]);
-            },
-          }}
+          onIconClick={isEditable ? handleIconClick : () => {}}
+          {...getAddableIconProp(isEditable)}
         />
       </Box>
       {customButton || (
-        <Box textAlign="center">
-          <Button
-            onClick={() => {
-              submitProposal({
-                // If icon can be removed, that means it was added by the user
-                // This might cause trouble later so might want to think about a better approach
-                addedIcons: activeIcons.filter((icon) => icon.canRemove),
-                activity,
-                projectId,
-                reload: false,
-                // phase: CoordinateGridPhases.MODIFY_PROPOSAL,
-              });
-            }}
-            colorScheme="teal"
-          >
-            Save Changes
-          </Button>
-        </Box>
+        <ProposalSubmitButton
+          isDisabled={!Boolean(activeIcons.length)}
+          addedIcons={activeIcons.filter((activeIcon) => activeIcon.canRemove)}
+          currentPhase={currentPhase}
+          nextPhase={getNextPhase(currentPhase)}
+        />
       )}
     </Box>
   );

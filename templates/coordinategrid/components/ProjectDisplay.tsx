@@ -1,5 +1,4 @@
-import { Box, Heading, useDisclosure, Text } from "@chakra-ui/react";
-import CoordinateGridSolutionArea from "templates/coordinategrid/components/CoordinateGridSolutionArea";
+import { Box, Heading, Text, Grid } from "@chakra-ui/react";
 import SolutionAreaDescription from "templates/coordinategrid/components/SolutionAreaDescription";
 import {
   getDefaultIconCoordinates,
@@ -8,8 +7,8 @@ import {
 import { CoordinateGridPhases } from "templates/coordinategrid/constants";
 import ProjectDescription from "templates/coordinategrid/components/ProjectDescription";
 import PhaseCompletionPrompt from "templates/coordinategrid/components/PhaseCompletionPrompt";
-import ModifyProposalModal from "templates/coordinategrid/components/ModifyProposalModal";
-
+import PeerReview from "templates/coordinategrid/components/peerreview/Container";
+import ModifyProposalGrid from "templates/coordinategrid/components/ModifyProposalGrid";
 type Props = {
   data: any;
   currentPhase: any;
@@ -17,7 +16,6 @@ type Props = {
 };
 
 const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const mostRecentSolutionCoordinates = getPlacedIconCoordinates(userSolutions);
   const projectDefaultCoordinates = getDefaultIconCoordinates(
     data.projectData.placedIcons
@@ -37,37 +35,30 @@ const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
         <ProjectDescription data={data} />
       </Box>
 
-      <Box
-        width="100%"
-        padding={8}
-        textAlign="center"
-        border="1px solid lightgray"
-      >
+      <Box padding={8} textAlign="center" border="1px solid lightgray">
         <PhaseCompletionPrompt data={data} currentPhase={currentPhase} />
 
-        <SolutionAreaDescription
-          solutionPrompt={data.phaseContent[currentPhase].solutionPrompt}
-        />
-        {data.phaseContent[currentPhase].solutionPromptHelper && (
-          <Text as="i">
-            {data.phaseContent[currentPhase].solutionPromptHelper}
-          </Text>
-        )}
+        <Grid templateColumns="repeat(2, 1fr)" gap={4}>
+          <Box display="block">
+            <SolutionAreaDescription
+              solutionPrompt={data.phaseContent[currentPhase].solutionPrompt}
+            />
+            {data.phaseContent[currentPhase].solutionPromptHelper && (
+              <Text as="i">
+                {data.phaseContent[currentPhase].solutionPromptHelper}
+              </Text>
+            )}
+            <ModifyProposalGrid
+              mostRecentSolutionCoordinates={allIcons}
+              isEditable={currentPhase !== CoordinateGridPhases.FINAL_SOLUTION}
+              currentPhase={currentPhase}
+            />
+          </Box>
 
-        <CoordinateGridSolutionArea
-          isEditable={currentPhase === CoordinateGridPhases.PREDICTION}
-          initialIcons={allIcons}
-          initialAddedIcons={mostRecentSolutionCoordinates}
-          currentPhase={currentPhase}
-          onOpen={onOpen}
-          margin={"auto"}
-        />
-        <ModifyProposalModal
-          isOpen={isOpen}
-          currentPhase={currentPhase}
-          onClose={onClose}
-          mostRecentSolutionCoordinates={allIcons}
-        />
+          {currentPhase === CoordinateGridPhases.MODIFY_PROPOSAL && (
+            <PeerReview projectDefaultCoordinates={projectDefaultCoordinates} />
+          )}
+        </Grid>
       </Box>
     </Box>
   );

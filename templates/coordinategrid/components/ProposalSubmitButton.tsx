@@ -40,6 +40,10 @@ export const ProposalSubmitButton = ({
   nextPhase,
   isDisabled,
 }: Props) => {
+  if (currentPhase === CoordinateGridPhases.FINAL_SOLUTION) {
+    return null;
+  }
+
   const router = useRouter();
   const { projectId } = router.query;
   return (

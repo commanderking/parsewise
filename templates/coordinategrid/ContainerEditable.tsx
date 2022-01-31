@@ -33,7 +33,7 @@ const CoordinateGridContainer = ({ data }) => {
   const [name, setName] = useState(data.name);
 
   const [placeableIcon, setPlaceableIcon] = useState(
-    data.projectData.addableIcon.iconType
+    data.projectData?.addableIcon?.iconType
   );
 
   const [activeIcons, setActiveIcons] = useState(
