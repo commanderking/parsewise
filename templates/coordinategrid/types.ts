@@ -23,3 +23,11 @@ export type StudentSolution = {
   votes?: number;
   isStarred?: boolean;
 };
+
+export type Review = {
+  isUpvoted: boolean;
+  feedback: string | null;
+};
+
+// Solution format for peer reviews
+export type PeerReviewSolution = StudentSolution & Review;

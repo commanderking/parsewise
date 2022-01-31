@@ -6,7 +6,6 @@ import {
 } from "templates/coordinategrid/utils";
 import { CoordinateGridPhases } from "templates/coordinategrid/constants";
 import LearningResources from "templates/coordinategrid/components/LearningResources";
-import PeerReview from "templates/coordinategrid/components/peerreview/Container";
 import ProjectDisplay from "templates/coordinategrid/components/ProjectDisplay";
 import { projectContainerWidth } from "constants/styles";
 
@@ -30,9 +29,6 @@ const CoordinateGridContainer = ({ data }) => {
           currentPhase={currentPhase}
           userSolutions={userSolutions}
         />
-        {currentPhase === CoordinateGridPhases.MODIFY_PROPOSAL && (
-          <PeerReview projectDefaultCoordinates={projectDefaultCoordinates} />
-        )}
 
         {currentPhase !== CoordinateGridPhases.PREDICTION && (
           <Fragment>

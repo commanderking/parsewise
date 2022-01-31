@@ -1,8 +1,11 @@
+import { useEffect, useState } from "react";
 import useSWR from "swr";
 import { Box, Heading, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import Solution from "./Solution";
 import { getPlacedIconsForSolution } from "templates/coordinategrid/utils";
+import { getPeerReviewSolutions } from "templates/coordinategrid/utils";
+import { Review } from "templates/coordinategrid/types";
 
 const fetcher = (args) => fetch(args).then((res) => res.json());
 
@@ -14,33 +17,52 @@ const PeerProposalReview = ({ projectDefaultCoordinates }) => {
     fetcher
   );
 
+  const solutions = getPeerReviewSolutions(data);
+  const [reviews, setReviews] = useState<{ [id: string]: Review }>({});
+
+  const upvote = (id: string) => {
+    setReviews({
+      ...reviews,
+      [id]: {
+        ...reviews[id],
+        isUpvoted: !reviews[id]?.isUpvoted,
+      },
+    });
+  };
+
+  const giveFeedback = (id: string, feedback: string) => {
+    setReviews({
+      ...reviews,
+      [id]: {
+        ...reviews[id],
+        feedback,
+      },
+    });
+  };
+
+  console.log({ reviews });
+
   if (!data) {
     return <div>Loading Proposals</div>;
   }
   return (
-    <Box padding={8}>
-      <Heading fontSize="2xl">Review Community Proposals</Heading>
-      <Text>
-        Feel free to review and provide feedback on as many as possible!
-      </Text>
-      {data.map((proposedSolution, index) => {
+    <Box textAlign="center">
+      {solutions.map((proposedSolution, index) => {
         const allPlacedCoordinates = [
           ...projectDefaultCoordinates,
           ...getPlacedIconsForSolution(proposedSolution.solution),
         ];
 
+        console.log("proposed id", reviews[proposedSolution.id]);
+
         return (
-          <Box
-            key={proposedSolution.id}
-            padding={8}
-            border="1px solid lightgray"
-            borderRadius={5}
-            mt={8}
-          >
+          <Box key={proposedSolution.id}>
             <Solution
               proposedSolution={proposedSolution}
               allPlacedCoordinates={allPlacedCoordinates}
-              proposalNumber={index + 1}
+              review={reviews[proposedSolution.id]}
+              upvote={upvote}
+              giveFeedback={giveFeedback}
             />
           </Box>
         );

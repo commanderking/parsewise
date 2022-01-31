@@ -6,3 +6,5 @@ export const CoordinateGridPhases: { [key in Phase]: Phase } = {
   MODIFY_PROPOSAL: "MODIFY_PROPOSAL",
   FINAL_SOLUTION: "FINAL_SOLUTION",
 };
+
+export const gridDimension = 400;

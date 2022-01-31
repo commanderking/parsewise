@@ -1,7 +1,7 @@
 import React from "react";
 import _ from "lodash";
 import { useRouter } from "next/router";
-import { Box, Button, Heading } from "@chakra-ui/react";
+import { Box, Button, Heading, Text } from "@chakra-ui/react";
 import { CheckCircleIcon } from "@chakra-ui/icons";
 import CoordinateGridSolutionArea from "templates/coordinategrid/components/CoordinateGridSolutionArea";
 import PeerReviewReactions from "components/reactions/PeerReviewReactions";
@@ -9,6 +9,7 @@ import Comment from "templates/coordinategrid/components/peerreview/Comment";
 import { useState } from "react";
 import { reactionIds } from "components/reactions/constants";
 import { submitFeedback } from "templates/coordinategrid/requests";
+import { ArrowUp } from "react-feather";
 
 const initialReactionStates = reactionIds.reduce(
   (reactions, currentReaction) => {
@@ -22,8 +23,10 @@ const initialReactionStates = reactionIds.reduce(
 
 const Solution = ({
   allPlacedCoordinates,
-  proposalNumber,
   proposedSolution,
+  review,
+  upvote,
+  giveFeedback,
 }) => {
   const router = useRouter();
   const { projectId, studentId } = router.query;
@@ -31,6 +34,10 @@ const Solution = ({
   const [reactions, setReactions] = useState(initialReactionStates);
   const [comment, setComment] = useState([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
+
+  const { id } = proposedSolution;
+
+  console.log({ proposedSolution });
 
   const onReactionClick = (event) => {
     const reactionId = event.target.value;
@@ -55,24 +62,54 @@ const Solution = ({
     );
   }
 
+  console.log(review && review[id]);
+
+  const isUpvoted = review && review.isUpvoted;
+  const upvotedColor = isUpvoted ? "#00CC00" : "black";
+
   return (
     <Box textAlign="center">
-      <Heading fontSize="lg">Review Proposal {proposalNumber} </Heading>
+      <Heading fontSize="2xl">Community Proposal</Heading>
+      <Text>Provide feedback to your peers!</Text>
       <CoordinateGridSolutionArea
         initialIcons={allPlacedCoordinates}
         isEditable={false}
         margin="auto"
       />
-      <PeerReviewReactions
-        currentReactions={reactions}
-        onReactionClick={onReactionClick}
-      />
+
+      <Box display="inline-flex" alignItems="center">
+        <Box
+          display="flex"
+          alignItems="center"
+          border="1px solid lightgray"
+          borderRadius={4}
+          height={10}
+          pl={3}
+          pr={3}
+          mr={2}
+        >
+          <Box verticalAlign="top">
+            <ArrowUp size={20} strokeWidth={5} color={upvotedColor} />
+          </Box>
+        </Box>
+        <Button
+          onClick={() => {
+            upvote(id);
+          }}
+        >
+          <Text fontSize="md" ml={2}>
+            {isUpvoted ? "Remove Upvote" : "Upvote"}
+          </Text>
+        </Button>
+      </Box>
+
       <Comment comment={comment} handleCommentChange={handleCommentChange} />
       <Button
         colorScheme="teal"
         onClick={() => {
           // Mimic call
           setTimeout(() => {
+            giveFeedback(id, comment);
             submitFeedback({
               studentId,
               proposerStudentId: proposedSolution.studentId,
