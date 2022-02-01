@@ -5,7 +5,7 @@ import { replaceListDom } from "utils/htmlParser";
 export const ProjectDescription = ({ data }) => {
   return (
     <Box>
-      <Box mt={8} backgroundColor="lightgray" padding={8}>
+      <Box mt={8} backgroundColor="#ececec" padding={8}>
         <Heading fontSize="2xl">Problem Overview</Heading>
         <Box mt={4}>
           {parse(data.overview, {

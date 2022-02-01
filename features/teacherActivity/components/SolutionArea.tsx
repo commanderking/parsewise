@@ -1,7 +1,6 @@
-import { Dispatch, SetStateAction } from "react";
 import { Box, Heading, Text, Divider, Button } from "@chakra-ui/react";
 import CoordinateGridSolutionArea from "templates/coordinategrid/components/CoordinateGridSolutionArea";
-import { ArrowUp, Star } from "react-feather";
+import { CheckCircle, Star } from "react-feather";
 import { StudentSolutions } from "features/teacherActivity/utils";
 
 type Props = {
@@ -11,6 +10,7 @@ type Props = {
     isEditable: boolean;
   };
   title?: string;
+  subtitle?: string;
   starSolution?: (id) => void;
   showMetrics?: boolean;
   noSolutionsText?: string;
@@ -21,6 +21,7 @@ const iconSize = 20;
 const TopProposals = ({
   solutionProps,
   title,
+  subtitle,
   starSolution,
   showMetrics = true,
   noSolutionsText = "No solutions to display yet...",
@@ -32,12 +33,13 @@ const TopProposals = ({
   return (
     <Box mt={8}>
       {title && <Heading size="md">{title}</Heading>}
+      {subtitle && <Text as={"i"}>{subtitle}</Text>}
       {!solutions.length && (
         <Box
           width="80%"
           height={"300px"}
           display="flex"
-          backgroundColor="lightgray"
+          backgroundColor="#ececec"
           justifyContent="center"
           alignItems="center"
           margin="auto"
@@ -58,6 +60,7 @@ const TopProposals = ({
                 key={solution.id}
                 alignItems="flex-start"
                 textAlign="center"
+                mb={8}
               >
                 <Text
                   display="block"
@@ -85,18 +88,20 @@ const TopProposals = ({
                       <Box
                         display="flex"
                         alignItems="center"
-                        border="1px solid lightgray"
+                        border="1px solid #ececec"
                         borderRadius={4}
                         height={10}
                         pl={3}
                         pr={3}
                         mr={2}
                       >
-                        <Text fontSize="xl">{solution.votes}</Text>
+                        <Text fontSize="xl" mr={1}>
+                          {solution.votes}
+                        </Text>
                         <Box verticalAlign="top">
-                          <ArrowUp
+                          <CheckCircle
                             size={iconSize}
-                            strokeWidth={5}
+                            strokeWidth={3}
                             color="#00CC00"
                           />
                         </Box>

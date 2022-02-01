@@ -25,13 +25,6 @@ const CoordinateGridContainer = ({ data }) => {
           currentPhase={currentPhase}
           userSolutions={userSolutions}
         />
-
-        {currentPhase !== CoordinateGridPhases.PREDICTION && (
-          <Fragment>
-            <LearningResources data={data} />
-            <Divider mt={8} />
-          </Fragment>
-        )}
       </Box>
     </Box>
   );

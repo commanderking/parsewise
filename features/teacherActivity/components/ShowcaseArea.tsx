@@ -21,8 +21,9 @@ const ShowcaseArea = ({ solutionProps }: Props) => {
       <SolutionArea
         solutionProps={solutionProps}
         title={title}
+        subtitle="Starred solutions will appear here and be shared with students in your class."
         showMetrics={false}
-        noSolutionsText="No solutions starred yet. Star student solutions below to highlight solutions you and your class want to review together."
+        noSolutionsText="No solutions starred yet."
       />
     </Box>
   );

@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { CoordinateGridPhases } from "templates/coordinategrid/constants";
 import { Phase } from "templates/types";
 import { CoordinateGridSolution } from "templates/coordinategrid/types";
@@ -7,15 +8,31 @@ import {
   PeerReviewSolution,
 } from "templates/coordinategrid/types";
 
+export const sortAndLabelIcons = (coordinates) => {
+  const icons = _.sortBy(coordinates, ["y", "x"])
+    .slice()
+    // we want descending sort, _.sortBy default to ascending
+    .reverse()
+    .map((coordinate, index) => {
+      return {
+        ...coordinate,
+        label: String.fromCharCode(65 + index),
+      };
+    });
+  return icons;
+};
+
 export const getDefaultIconCoordinates = (
   solutionCoordinates: CoordinateGridSolution[]
 ) => {
-  return solutionCoordinates.map((coordinate) => ({
+  const defaultIcons = solutionCoordinates.map((coordinate) => ({
     ...coordinate,
     size: 15,
     image: iconMap.HOUSE.src,
     canRemove: false,
   }));
+
+  return sortAndLabelIcons(defaultIcons);
 };
 
 export const getPlacedIconsForSolution = (

@@ -12,7 +12,7 @@ import {
 import ClosableTags from "templates/scatterplot/components/ClosableTags";
 import { phases } from "templates/scatterplot/constants/phases";
 
-const grayBorder = "1px solid lightgray";
+const grayBorder = "1px solid #ececec";
 
 const SchoolsSelection = ({ schools, setCurrentPhase }) => {
   const [addedSchools, setAddedSchools] = useState([]);
