@@ -30,7 +30,7 @@ export const proposals = [
     author: "TEACHER",
     solution: [
       { x: -2, y: 2 },
-      { x: 3, y: 2 },
+      { x: 4, y: 5 },
       { x: -1, y: -2 },
       { x: 7, y: -6 },
     ],

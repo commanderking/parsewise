@@ -40,7 +40,7 @@ const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
       <Box padding={8} textAlign="center" border="1px solid #ececec">
         <PhaseCompletionPrompt data={data} currentPhase={currentPhase} />
 
-        <Grid templateColumns="repeat(2, 1fr)" gap={4}>
+        <Grid templateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)"]} gap={4}>
           <Box display="block">
             <SolutionAreaDescription
               solutionPrompt={data.phaseContent[currentPhase].solutionPrompt}
@@ -61,7 +61,8 @@ const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
               <LearningResources data={data} />
             </Box>
           )}
-          {currentPhase === CoordinateGridPhases.MODIFY_PROPOSAL && (
+          {(currentPhase === CoordinateGridPhases.MODIFY_PROPOSAL ||
+            currentPhase === CoordinateGridPhases.FINAL_SOLUTION) && (
             <PeerReview projectDefaultCoordinates={projectDefaultCoordinates} />
           )}
         </Grid>

@@ -64,26 +64,18 @@ const Solution = ({
       />
 
       <Box display="inline-flex" alignItems="center" mb={2}>
-        <Box
-          display="flex"
-          alignItems="center"
-          border="1px solid #ececec"
-          borderRadius={4}
-          height={10}
-          pl={3}
-          pr={3}
-          mr={2}
-        >
-          {isUpvoted ? "Approved!" : "Approve?"}
+        <Box alignItems="center" border="1px solid #ececec" borderRadius={4}>
+          <Button
+            onClick={() => {
+              upvote(id);
+            }}
+            variant="ghost"
+          >
+            <Text mr={2}>{isUpvoted ? "Approved!" : "Approve?"}</Text>
+
+            <CheckCircle size={24} strokeWidth={3} color={upvotedColor} />
+          </Button>
         </Box>
-        <Button
-          onClick={() => {
-            upvote(id);
-          }}
-          variant="ghost"
-        >
-          <CheckCircle size={24} strokeWidth={3} color={upvotedColor} />
-        </Button>
       </Box>
 
       <Comment comment={comment} handleCommentChange={handleCommentChange} />
