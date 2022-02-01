@@ -8,7 +8,7 @@ import Comment from "templates/coordinategrid/components/peerreview/Comment";
 import { useState } from "react";
 import { reactionIds } from "components/reactions/constants";
 import { submitFeedback } from "templates/coordinategrid/requests";
-import { ArrowUp } from "react-feather";
+import { CheckCircle } from "react-feather";
 
 const Solution = ({
   allPlacedCoordinates,
@@ -56,7 +56,7 @@ const Solution = ({
   return (
     <Box textAlign="center">
       <Heading fontSize="2xl">Community Proposal</Heading>
-      <Text>Provide feedback to your peers!</Text>
+      <Text as={"i"}>Provide feedback to your peers.</Text>
       <CoordinateGridSolutionArea
         initialIcons={allPlacedCoordinates}
         isEditable={false}
@@ -67,25 +67,22 @@ const Solution = ({
         <Box
           display="flex"
           alignItems="center"
-          border="1px solid lightgray"
+          border="1px solid #ececec"
           borderRadius={4}
           height={10}
           pl={3}
           pr={3}
           mr={2}
         >
-          <Box verticalAlign="top">
-            <ArrowUp size={20} strokeWidth={5} color={upvotedColor} />
-          </Box>
+          {isUpvoted ? "Approved!" : "Approve?"}
         </Box>
         <Button
           onClick={() => {
             upvote(id);
           }}
+          variant="ghost"
         >
-          <Text fontSize="md" ml={2}>
-            {isUpvoted ? "Remove Upvote" : "Upvote"}
-          </Text>
+          <CheckCircle size={24} strokeWidth={3} color={upvotedColor} />
         </Button>
       </Box>
 

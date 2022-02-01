@@ -3,10 +3,10 @@
   "name": "Providing Residents with Cell Phone Coverage",
   "avatar": "robot_1",
   "requirements": [
-    "Each unit on the map represents 1 mile ",
-    "Residents prefer cell towers be built at least 1 mile away from their neighborhood."
+    "Each unit on the grid represents 1 mile",
+    "Cell towers need to be at least 1 mile away from each house."
   ],
-  "overview": "<p>Government officials are determining how many cell towers are needed to provide coverage to as many residents as possible. Houses within 4 miles of each cell tower can receive cell coverage. How many cell towers should they build and where?&nbsp;</p><p><strong>Details:</strong></p><ol><li>Each unit on the map represents 1 mile.</li><li>Residents prefer cell towers be built at least 1 mile away from their house.&nbsp;</li></ol>",
+  "overview": "<p>Government officials are figuring out where to build cell towers to provide cellular coverage. How many cell towers should they build and where?&nbsp;</p><p><strong>Details:</strong></p><ol><li>Each unit on the grid represents 1 mile</li><li>Cell towers need to be at least 1 mile away from each house.</li><li>Houses within 4 miles of each cell tower can receive cell coverage</li></ol>",
   "projectType": "COORDINATE_GRID",
   "projectData": {
     "placedIcons": [
@@ -69,12 +69,12 @@
       "solutionPromptHelper": "Click a coordinate to place a cell tower."
     },
     "FIRST_PROPOSAL": {
-      "instructions": "Thanks for sharing your initial thoughts! As a next step, review some of the skills that might help you improve on your initial proposal. When you're ready, submit your first proposal.",
+      "instructions": "Thanks for sharing your initial thoughts! As a next step, review some of the skills that might help you improve on your initial proposal. When you're ready, submit your first proposal (You can still edit later).",
       "solutionPrompt": "Your Current Proposal",
       "solutionPromptHelper": "Edit and submit your proposal."
     },
     "MODIFY_PROPOSAL": {
-      "instructions": "Your peers and members of the community have also submitted proposals. Help review them to see whether they're on the right track. They might also give you ideas for how to improve your own proposal.",
+      "instructions": "Your peers and members of the community have also submitted proposals. Review them and provide feedback. They might also give you ideas for how to improve your own proposal.",
       "solutionPrompt": "Your Current Proposal",
       "solutionPromptHelper": "Edit and finalize your proposal."
     },
@@ -92,12 +92,12 @@
     },
     {
       "url": "https://www.khanacademy.org/math/basic-geo/basic-geometry-pythagorean-theorem/pythagorean-theorem-distance/v/example-finding-distance-with-pythagorean-theorem",
-      "title": "Khan Academy 1 ",
+      "title": "Khan Academy ",
       "description": "Finding distance with Pythagorean theorem"
     },
     {
       "url": "https://www.khanacademy.org/math/cc-eighth-grade-math/cc-8th-numbers-operations/cc-8th-approximating-irrational-numbers/v/approximating-square-roots-2",
-      "title": "Khan Academy 2",
+      "title": "Khan Academy",
       "description": "Approximating irrational numbers"
     },
     {

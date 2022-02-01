@@ -9,11 +9,15 @@ const getSubmitButtonText = (currentPhase) => {
     return "Submit Prediction";
   }
 
+  if (currentPhase === CoordinateGridPhases.FIRST_PROPOSAL) {
+    return "Submit First Proposal";
+  }
+
   if (currentPhase === CoordinateGridPhases.MODIFY_PROPOSAL) {
     return "Finalize Proposal";
   }
 
-  return "Submit Proposal";
+  return "Modify Proposal";
 };
 
 const getOnClick = (addedIcons, projectId, nextPhase) => {

@@ -23,7 +23,7 @@ const TeacherDashboardContainer = () => {
           return (
             <Box
               padding={5}
-              border="1px solid lightgray"
+              border="1px solid #ececec"
               borderRadius={5}
               key={`${project.id}-project-card-${index}`}
             >

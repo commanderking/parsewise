@@ -10,11 +10,9 @@ import {
 
 const LearningResources = ({ data }) => {
   return (
-    <Box mt={8} mb={8}>
+    <Box>
       <Heading fontSize="2xl">Learn</Heading>
-      <Text mt={4}>
-        Some learning resources that might help you solve the project
-      </Text>
+      <Text as={"i"}>Some learning resources that might help</Text>
       <Grid templateColumns="1fr 1fr" gridAutoRows="max-content" gap={6} mt={4}>
         {data.resources.map((resource) => {
           return (

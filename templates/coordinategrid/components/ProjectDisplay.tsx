@@ -1,4 +1,4 @@
-import { Box, Heading, Text, Grid } from "@chakra-ui/react";
+import { Box, Heading, Text, Grid, Divider } from "@chakra-ui/react";
 import SolutionAreaDescription from "templates/coordinategrid/components/SolutionAreaDescription";
 import {
   getDefaultIconCoordinates,
@@ -9,6 +9,8 @@ import ProjectDescription from "templates/coordinategrid/components/ProjectDescr
 import PhaseCompletionPrompt from "templates/coordinategrid/components/PhaseCompletionPrompt";
 import PeerReview from "templates/coordinategrid/components/peerreview/Container";
 import ModifyProposalGrid from "templates/coordinategrid/components/ModifyProposalGrid";
+import LearningResources from "templates/coordinategrid/components/LearningResources";
+
 type Props = {
   data: any;
   currentPhase: any;
@@ -35,7 +37,7 @@ const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
         <ProjectDescription data={data} />
       </Box>
 
-      <Box padding={8} textAlign="center" border="1px solid lightgray">
+      <Box padding={8} textAlign="center" border="1px solid #ececec">
         <PhaseCompletionPrompt data={data} currentPhase={currentPhase} />
 
         <Grid templateColumns="repeat(2, 1fr)" gap={4}>
@@ -54,7 +56,11 @@ const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
               currentPhase={currentPhase}
             />
           </Box>
-
+          {currentPhase === CoordinateGridPhases.FIRST_PROPOSAL && (
+            <Box>
+              <LearningResources data={data} />
+            </Box>
+          )}
           {currentPhase === CoordinateGridPhases.MODIFY_PROPOSAL && (
             <PeerReview projectDefaultCoordinates={projectDefaultCoordinates} />
           )}
