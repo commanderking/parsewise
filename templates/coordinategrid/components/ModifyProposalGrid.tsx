@@ -16,6 +16,7 @@ const ModifyProposalGrid = ({
   customButton = null,
   isEditable = true,
   currentPhase,
+  gridDimension = 400,
 }) => {
   const router = useRouter();
   const { projectId } = router.query;
@@ -74,11 +75,11 @@ const ModifyProposalGrid = ({
 
   return (
     <Box>
-      <Box width={400} margin="auto">
+      <Box width={gridDimension}>
         <CoordinateGrid
           id="coordinate grid"
-          gridHeight={400}
-          gridWidth={400}
+          gridHeight={gridDimension}
+          gridWidth={gridDimension}
           activeIcons={activeIcons}
           onIconClick={isEditable ? handleIconClick : () => {}}
           {...getAddableIconProp(isEditable)}

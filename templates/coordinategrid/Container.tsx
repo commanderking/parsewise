@@ -1,11 +1,7 @@
-import { Fragment, useState } from "react";
-import { Box, Divider } from "@chakra-ui/react";
-import {
-  getCurrentPhase,
-  getDefaultIconCoordinates,
-} from "templates/coordinategrid/utils";
-import { CoordinateGridPhases } from "templates/coordinategrid/constants";
-import LearningResources from "templates/coordinategrid/components/LearningResources";
+import { useState } from "react";
+import { Box } from "@chakra-ui/react";
+import { getCurrentPhase } from "templates/coordinategrid/utils";
+
 import ProjectDisplay from "templates/coordinategrid/components/ProjectDisplay";
 import { projectContainerWidth } from "constants/styles";
 

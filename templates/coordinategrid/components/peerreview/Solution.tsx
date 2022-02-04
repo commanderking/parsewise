@@ -6,9 +6,9 @@ import { CheckCircleIcon } from "@chakra-ui/icons";
 import CoordinateGridSolutionArea from "templates/coordinategrid/components/CoordinateGridSolutionArea";
 import Comment from "templates/coordinategrid/components/peerreview/Comment";
 import { useState } from "react";
-import { reactionIds } from "components/reactions/constants";
 import { submitFeedback } from "templates/coordinategrid/requests";
 import { CheckCircle } from "react-feather";
+import ModifyProposalGrid from "templates/coordinategrid/components/ModifyProposalGrid";
 
 const Solution = ({
   allPlacedCoordinates,
