@@ -20,14 +20,16 @@ import PhaseCompletionPrompt from "templates/coordinategrid/components/PhaseComp
 import PeerReview from "templates/coordinategrid/components/peerreview/Container";
 import ModifyProposalGrid from "templates/coordinategrid/components/ModifyProposalGrid";
 import LearningResources from "templates/coordinategrid/components/LearningResources";
+import { StudentSolution } from "templates/coordinategrid/types";
 
 type Props = {
   data: any;
   currentPhase: any;
-  userSolutions?: Object[];
+  userSolutions?: StudentSolution[];
 };
 
 const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
+  console.log({ userSolutions });
   const mostRecentSolutionCoordinates = getPlacedIconCoordinates(userSolutions);
   const projectDefaultCoordinates = getDefaultIconCoordinates(
     data.projectData.placedIcons
