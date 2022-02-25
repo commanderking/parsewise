@@ -1,7 +1,7 @@
 import { Box, Heading, Text, Divider, Button } from "@chakra-ui/react";
-import CoordinateGridSolutionArea from "templates/coordinategrid/components/CoordinateGridSolutionArea";
 import { CheckCircle, Star } from "react-feather";
 import { StudentSolutions } from "features/teacherActivity/utils";
+import { CoordinateGrid } from "open-math-tools";
 
 type Props = {
   // As more solution comes in, this may need to be more unions of the different solution types
@@ -27,9 +27,10 @@ const TopProposals = ({
   noSolutionsText = "No solutions to display yet...",
 }: Props) => {
   // Component should be dynamic based on the activity type
-  const Component = CoordinateGridSolutionArea;
+  const Component = CoordinateGrid;
 
   const { solutions } = solutionProps;
+
   return (
     <Box mt={8}>
       {title && <Heading size="md">{title}</Heading>}
@@ -80,8 +81,10 @@ const TopProposals = ({
                   }
                 >
                   <Component
-                    initialIcons={solution.solution}
-                    isEditable={solutionProps.isEditable}
+                    id="grid"
+                    activeIcons={solution.solution}
+                    gridHeight={400}
+                    gridWidth={400}
                   />
                   {showMetrics && (
                     <Box display="inline-flex" alignItems="center">

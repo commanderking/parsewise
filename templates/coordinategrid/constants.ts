@@ -8,3 +8,5 @@ export const CoordinateGridPhases: { [key in Phase]: Phase } = {
 };
 
 export const gridDimension = 400;
+
+export const gridBreakpointDimensions = [350, 350, 350, 400];

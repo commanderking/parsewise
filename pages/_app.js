@@ -1,6 +1,8 @@
 import { ChakraProvider, theme, Box } from "@chakra-ui/react";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import Navbar from "components/navbar/Container";
+import store from "app/store";
+import { Provider } from "react-redux";
 
 let apolloClient;
 
@@ -13,17 +15,21 @@ function MyApp({ Component, pageProps }) {
       cache: new InMemoryCache(),
     });
 
+  console.log({ store });
+
   return (
-    <ApolloProvider client={apolloClient}>
-      <ChakraProvider theme={theme}>
-        <Box>
-          <Navbar />
-          <Box maxWidth="1048px" margin="auto" padding="20px" mt={10}>
-            <Component {...pageProps} />
+    <Provider store={store}>
+      <ApolloProvider client={apolloClient}>
+        <ChakraProvider theme={theme}>
+          <Box>
+            <Navbar />
+            <Box maxWidth="1048px" margin="auto" padding="20px" mt={10}>
+              <Component {...pageProps} />
+            </Box>
           </Box>
-        </Box>
-      </ChakraProvider>
-    </ApolloProvider>
+        </ChakraProvider>
+      </ApolloProvider>
+    </Provider>
   );
 }
 

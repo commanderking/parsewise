@@ -9,7 +9,7 @@ import { Review } from "templates/coordinategrid/types";
 
 const fetcher = (args) => fetch(args).then((res) => res.json());
 
-const PeerProposalReview = ({ projectDefaultCoordinates }) => {
+const PeerProposalReview = ({ projectDefaultCoordinates, currentPhase }) => {
   const router = useRouter();
   const { projectId } = router.query;
   const { data, error } = useSWR(
@@ -69,6 +69,7 @@ const PeerProposalReview = ({ projectDefaultCoordinates }) => {
           upvote={upvote}
           giveFeedback={giveFeedback}
           reviewNext={reviewNext}
+          currentPhase={currentPhase}
         />
       </Box>
     </Box>
