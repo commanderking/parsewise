@@ -46,7 +46,6 @@ const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
   const [activity, setActivity] = useState([]);
 
   const handleIconClick = (icon) => {
-    console.log("click");
     if (!icon.canRemove) {
       return;
     }
@@ -63,41 +62,28 @@ const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
     ]);
   };
 
-  const getAddableIconProp = (isEditable: boolean) => {
-    if (!isEditable) {
-      return null;
-    }
-
-    return {
-      addableIcon: {
-        // These don't matter when using activeIcons (so need to edit library)
+  const addableIcon = {
+    // These don't matter when using activeIcons (so need to edit library)
+    image: "/cell-tower.svg",
+    size: 20,
+    onAddIcon: (icon) => {
+      const { x, y } = icon;
+      const addedIconInfo = {
+        x,
+        y,
         image: "/cell-tower.svg",
         size: 20,
-        onAddIcon: (icon) => {
-          const { x, y } = icon;
+        timestamp: Date.now(),
+        canRemove: true,
+      };
 
-          const addedIconInfo = {
-            x,
-            y,
-            image: "/cell-tower.svg",
-            size: 20,
-            timestamp: Date.now(),
-            canRemove: true,
-          };
-
-          setActiveIcons([...activeIcons, addedIconInfo]);
-          setActivity([
-            ...activity,
-            { ...addedIconInfo, type: CoordinateGridActions.ADD_ICON },
-          ]);
-        },
-      },
-    };
+      setActiveIcons([...activeIcons, addedIconInfo]);
+      setActivity([
+        ...activity,
+        { ...addedIconInfo, type: CoordinateGridActions.ADD_ICON },
+      ]);
+    },
   };
-
-  const isEditable = true;
-
-  console.log({ activeIcons });
 
   return (
     <Box>
@@ -124,12 +110,12 @@ const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
             )}
             <Box width={gridDimension} margin="auto">
               <CoordinateGrid
-                id="coordinate grid"
+                id="coordinateGrid"
                 gridHeight={gridDimension}
                 gridWidth={gridDimension}
                 activeIcons={activeIcons}
-                onIconClick={isEditable ? handleIconClick : () => {}}
-                {...getAddableIconProp(isEditable)}
+                onIconClick={handleIconClick}
+                addableIcon={addableIcon}
               />
             </Box>
             <ProposalSubmitButton
