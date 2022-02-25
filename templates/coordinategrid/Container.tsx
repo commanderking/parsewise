@@ -17,7 +17,6 @@ const CoordinateGridContainer = ({ data }) => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     const localStoragePhase = getCurrentPhase(data.id);
-    console.log("localStoragePhase", localStoragePhase);
     dispatch(setCurrentPhase(localStoragePhase));
   }, []);
 
