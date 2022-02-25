@@ -17,7 +17,7 @@ const Container = () => {
             buttonHref="/project/1"
           />
         </Box>
-        <Box display="inline-block" ml={8}>
+        <Box display="inline-block" ml={[0, 8]}>
           <DemoCard
             title="Teacher"
             description="Select and showcase interesting student responses to start student conversation"

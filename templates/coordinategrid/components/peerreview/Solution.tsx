@@ -30,12 +30,16 @@ const Solution = ({
 
   const [comment, setComment] = useState("");
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const gridDimension = useBreakpointValue(gridBreakpointDimensions);
 
   const { id } = proposedSolution;
 
   const handleCommentChange = (e) => {
     setComment(e.target.value);
   };
+
+  const isUpvoted = review && review.isUpvoted;
+  const upvotedColor = isUpvoted ? "#00CC00" : "black";
 
   if (hasSubmitted) {
     return (
@@ -56,11 +60,6 @@ const Solution = ({
       </Box>
     );
   }
-
-  const isUpvoted = review && review.isUpvoted;
-  const upvotedColor = isUpvoted ? "#00CC00" : "black";
-
-  const gridDimension = useBreakpointValue(gridBreakpointDimensions);
 
   return (
     <Box textAlign="center">
