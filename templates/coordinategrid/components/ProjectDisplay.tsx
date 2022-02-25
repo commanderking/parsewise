@@ -1,11 +1,5 @@
-import {
-  Box,
-  Heading,
-  Text,
-  Grid,
-  useBreakpointValue,
-  Button,
-} from "@chakra-ui/react";
+import { useState } from "react";
+import { Box, Heading, Text, Grid, useBreakpointValue } from "@chakra-ui/react";
 import SolutionAreaDescription from "templates/coordinategrid/components/SolutionAreaDescription";
 import {
   getDefaultIconCoordinates,
@@ -18,9 +12,11 @@ import {
 import ProjectDescription from "templates/coordinategrid/components/ProjectDescription";
 import PhaseCompletionPrompt from "templates/coordinategrid/components/PhaseCompletionPrompt";
 import PeerReview from "templates/coordinategrid/components/peerreview/Container";
-import ModifyProposalGrid from "templates/coordinategrid/components/ModifyProposalGrid";
 import LearningResources from "templates/coordinategrid/components/LearningResources";
 import { StudentSolution } from "templates/coordinategrid/types";
+import { ProposalSubmitButton } from "templates/coordinategrid/components/ProposalSubmitButton";
+import { CoordinateGrid } from "open-math-tools";
+import { getNextPhase } from "templates/coordinategrid/utils";
 
 type Props = {
   data: any;
@@ -28,8 +24,12 @@ type Props = {
   userSolutions?: StudentSolution[];
 };
 
+const CoordinateGridActions = {
+  ADD_ICON: "ADD_ICON",
+  REMOVE_ICON: "REMOVE_ICON",
+};
+
 const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
-  console.log({ userSolutions });
   const mostRecentSolutionCoordinates = getPlacedIconCoordinates(userSolutions);
   const projectDefaultCoordinates = getDefaultIconCoordinates(
     data.projectData.placedIcons
@@ -41,7 +41,64 @@ const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
   ];
 
   const gridDimension = useBreakpointValue(gridBreakpointDimensions);
-  console.log({ gridDimension });
+
+  const [activeIcons, setActiveIcons] = useState(allIcons);
+  const [activity, setActivity] = useState([]);
+
+  const handleIconClick = (icon) => {
+    console.log("click");
+    if (!icon.canRemove) {
+      return;
+    }
+    const newIcons = activeIcons.filter(
+      (currentIcon) => !(currentIcon.x === icon.x && currentIcon.y === icon.y)
+    );
+
+    setActiveIcons(newIcons);
+
+    const { x, y } = icon;
+    setActivity([
+      ...activity,
+      { x, y, timestamp: Date.now(), type: CoordinateGridActions.REMOVE_ICON },
+    ]);
+  };
+
+  const getAddableIconProp = (isEditable: boolean) => {
+    if (!isEditable) {
+      return null;
+    }
+
+    return {
+      addableIcon: {
+        // These don't matter when using activeIcons (so need to edit library)
+        image: "/cell-tower.svg",
+        size: 20,
+        onAddIcon: (icon) => {
+          const { x, y } = icon;
+
+          const addedIconInfo = {
+            x,
+            y,
+            image: "/cell-tower.svg",
+            size: 20,
+            timestamp: Date.now(),
+            canRemove: true,
+          };
+
+          setActiveIcons([...activeIcons, addedIconInfo]);
+          setActivity([
+            ...activity,
+            { ...addedIconInfo, type: CoordinateGridActions.ADD_ICON },
+          ]);
+        },
+      },
+    };
+  };
+
+  const isEditable = true;
+
+  console.log({ activeIcons });
+
   return (
     <Box>
       <Box>
@@ -65,11 +122,23 @@ const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
                 {data.phaseContent[currentPhase].solutionPromptHelper}
               </Text>
             )}
-            <ModifyProposalGrid
-              mostRecentSolutionCoordinates={allIcons}
-              isEditable={currentPhase !== CoordinateGridPhases.FINAL_SOLUTION}
+            <Box width={gridDimension} margin="auto">
+              <CoordinateGrid
+                id="coordinate grid"
+                gridHeight={gridDimension}
+                gridWidth={gridDimension}
+                activeIcons={activeIcons}
+                onIconClick={isEditable ? handleIconClick : () => {}}
+                {...getAddableIconProp(isEditable)}
+              />
+            </Box>
+            <ProposalSubmitButton
+              isDisabled={!Boolean(activeIcons.length)}
+              addedIcons={activeIcons.filter(
+                (activeIcon) => activeIcon.canRemove
+              )}
               currentPhase={currentPhase}
-              gridDimension={gridDimension}
+              nextPhase={getNextPhase(currentPhase)}
             />
           </Box>
           {currentPhase === CoordinateGridPhases.FIRST_PROPOSAL && (
@@ -79,7 +148,10 @@ const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
           )}
           {(currentPhase === CoordinateGridPhases.MODIFY_PROPOSAL ||
             currentPhase === CoordinateGridPhases.FINAL_SOLUTION) && (
-            <PeerReview projectDefaultCoordinates={projectDefaultCoordinates} />
+            <PeerReview
+              currentPhase={currentPhase}
+              projectDefaultCoordinates={projectDefaultCoordinates}
+            />
           )}
         </Grid>
       </Box>

@@ -1,14 +1,20 @@
 import React from "react";
 import _ from "lodash";
 import { useRouter } from "next/router";
-import { Box, Button, Heading, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Heading,
+  Text,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import { CheckCircleIcon } from "@chakra-ui/icons";
-import CoordinateGridSolutionArea from "templates/coordinategrid/components/CoordinateGridSolutionArea";
 import Comment from "templates/coordinategrid/components/peerreview/Comment";
 import { useState } from "react";
 import { submitFeedback } from "templates/coordinategrid/requests";
 import { CheckCircle } from "react-feather";
-import ModifyProposalGrid from "templates/coordinategrid/components/ModifyProposalGrid";
+import { CoordinateGrid } from "open-math-tools";
+import { gridBreakpointDimensions } from "templates/coordinategrid/constants";
 
 const Solution = ({
   allPlacedCoordinates,
@@ -17,6 +23,7 @@ const Solution = ({
   upvote,
   giveFeedback,
   reviewNext,
+  currentPhase,
 }) => {
   const router = useRouter();
   const { projectId, studentId } = router.query;
@@ -53,15 +60,20 @@ const Solution = ({
   const isUpvoted = review && review.isUpvoted;
   const upvotedColor = isUpvoted ? "#00CC00" : "black";
 
+  const gridDimension = useBreakpointValue(gridBreakpointDimensions);
+
   return (
     <Box textAlign="center">
       <Heading fontSize="2xl">Community Proposal</Heading>
       <Text as={"i"}>Provide feedback to your peers.</Text>
-      <CoordinateGridSolutionArea
-        initialIcons={allPlacedCoordinates}
-        isEditable={false}
-        margin="auto"
-      />
+      <Box width={gridDimension} margin="auto">
+        <CoordinateGrid
+          id="coordinate grid"
+          gridHeight={gridDimension}
+          gridWidth={gridDimension}
+          activeIcons={allPlacedCoordinates}
+        />
+      </Box>
 
       <Box display="inline-flex" alignItems="center" mb={2}>
         <Box alignItems="center" border="1px solid #ececec" borderRadius={4}>
