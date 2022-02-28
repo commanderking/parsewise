@@ -24,7 +24,7 @@ import { StudentSolution } from "templates/coordinategrid/types";
 import { ProposalSubmitButton } from "templates/coordinategrid/components/ProposalSubmitButton";
 import { CoordinateGrid } from "open-math-tools";
 import { getNextPhase } from "templates/coordinategrid/utils";
-
+import CommentList from "components/comments/CommentList";
 type Props = {
   data: any;
   currentPhase: any;
@@ -133,6 +133,9 @@ const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
               currentPhase={currentPhase}
               nextPhase={getNextPhase(currentPhase)}
             />
+            <Box mt={0}>
+              <CommentList comments={[]} />
+            </Box>
           </Box>
           {currentPhase === CoordinateGridPhases.FIRST_PROPOSAL && (
             <Box>
@@ -151,7 +154,6 @@ const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
         {userSolutions.length > 1 && (
           <Box mt={8}>
             <Heading fontSize="2xl" mb={8}>
-              {" "}
               Your Previous Proposals
             </Heading>
             {userSolutions.map((solution, index) => {
