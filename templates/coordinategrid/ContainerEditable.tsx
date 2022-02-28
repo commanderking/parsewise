@@ -6,12 +6,14 @@ import {
   Textarea,
   IconButton,
   Button,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { CoordinateGrid } from "open-math-tools";
 import { iconMap } from "constants/icons";
 import Image from "next/image";
 import { saveCustomProject } from "templates/coordinategrid/requests";
 import dynamic from "next/dynamic";
+import { gridBreakpointDimensions } from "templates/coordinategrid/constants";
 
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { EditorState, ContentState, convertToRaw } from "draft-js";
@@ -44,6 +46,8 @@ const CoordinateGridContainer = ({ data }) => {
     }))
   );
 
+  const gridDimension = useBreakpointValue(gridBreakpointDimensions);
+
   const [editorState, setEditorState] = useState(() => {
     const contentBlock = window ? htmlToDraft(data.overview) : null;
     if (contentBlock) {
@@ -73,8 +77,10 @@ const CoordinateGridContainer = ({ data }) => {
 
   return (
     <Box maxWidth={1024} margin="auto" mb={150}>
-      <Box mt={8}>
-        <Heading size="lg">Project Name</Heading>
+      <Box>
+        <Heading mb={2} size="lg">
+          Project Name
+        </Heading>
         <Textarea
           onChange={(e) => {
             setName(e.target.value);
@@ -82,8 +88,11 @@ const CoordinateGridContainer = ({ data }) => {
           value={name}
         />
       </Box>
+
       <Box mt={8}>
-        <Heading size="lg">Problem Overview</Heading>
+        <Heading mb={2} size="lg">
+          Description
+        </Heading>
         <Box border="1px solid" borderColor="gray.200" pl={4} pr={4}>
           <Editor
             editorState={editorState}
@@ -106,8 +115,8 @@ const CoordinateGridContainer = ({ data }) => {
         <Heading size="lg">Starting Grid</Heading>
         <CoordinateGrid
           id="coordinate grid"
-          gridHeight={400}
-          gridWidth={400}
+          gridHeight={gridDimension}
+          gridWidth={gridDimension}
           activeIcons={activeIcons}
           onIconClick={handleIconClick}
           addableIcon={{
@@ -146,11 +155,12 @@ const CoordinateGridContainer = ({ data }) => {
                 border={
                   isSelectedPlaceableIcon ? "3px solid teal" : "3px solid white"
                 }
-                padding={5}
+                padding={15}
                 aria-label="icon"
                 icon={
                   <Image src={icon.src} alt="icon" width="20px" height="20px" />
                 }
+                theme="ghost"
               />
             );
           })}

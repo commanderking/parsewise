@@ -6,7 +6,7 @@
     "Each unit on the grid represents 1 mile",
     "Cell towers need to be at least 1 mile away from each house."
   ],
-  "overview": "<p>Government officials are figuring out where to build cell towers to provide cellular coverage to residents. How many cell towers should they build and where?&nbsp;</p><p><strong>Details:</strong></p><ol><li>Each unit on the grid represents 1 mile</li><li>Cell towers need to be at least 1 mile away from each house.</li><li>Houses within 4 miles of each cell tower can receive cell coverage</li></ol>",
+  "overview": "<p>Your company is figuring out where to build cell towers to provide coverage to local residents. How many cell towers should they build and where?&nbsp;</p><p><strong>Details:</strong></p><ol><li>Each unit on the grid represents 1 mile</li><li>Houses within 4 miles of each cell tower can receive good cell coverage</li></ol>",
   "projectType": "COORDINATE_GRID",
   "projectData": {
     "placedIcons": [
@@ -69,7 +69,7 @@
       "solutionPromptHelper": "Click a coordinate to place a cell tower."
     },
     "FIRST_PROPOSAL": {
-      "instructions": "Thanks for sharing your initial thoughts! As a next step, review some of the skills that might help you improve on your initial proposal. When you're ready, submit your first proposal (You can still edit later).",
+      "instructions": "Thanks for sharing your initial thoughts! As a next step, review some of the skills that might help you improve on your initial proposal. When you're ready, submit your first proposal (you can still edit later).",
       "solutionPrompt": "Your Current Proposal",
       "solutionPromptHelper": "Edit and submit your proposal."
     },

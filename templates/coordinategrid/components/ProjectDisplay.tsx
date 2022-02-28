@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { Box, Heading, Text, Grid, useBreakpointValue } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  Text,
+  Grid,
+  Divider,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import SolutionAreaDescription from "templates/coordinategrid/components/SolutionAreaDescription";
 import {
   getDefaultIconCoordinates,
@@ -17,7 +24,7 @@ import { StudentSolution } from "templates/coordinategrid/types";
 import { ProposalSubmitButton } from "templates/coordinategrid/components/ProposalSubmitButton";
 import { CoordinateGrid } from "open-math-tools";
 import { getNextPhase } from "templates/coordinategrid/utils";
-
+import CommentList from "components/comments/CommentList";
 type Props = {
   data: any;
   currentPhase: any;
@@ -98,7 +105,7 @@ const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
       <Box padding={[2, 8]} textAlign="center" border="1px solid #ececec">
         <PhaseCompletionPrompt data={data} currentPhase={currentPhase} />
 
-        <Grid templateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)"]} gap={4}>
+        <Grid templateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)"]} gap={8}>
           <Box display="block" id="hey">
             <SolutionAreaDescription
               solutionPrompt={data.phaseContent[currentPhase].solutionPrompt}
@@ -126,6 +133,9 @@ const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
               currentPhase={currentPhase}
               nextPhase={getNextPhase(currentPhase)}
             />
+            <Box mt={0}>
+              <CommentList comments={[]} />
+            </Box>
           </Box>
           {currentPhase === CoordinateGridPhases.FIRST_PROPOSAL && (
             <Box>
@@ -140,6 +150,35 @@ const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
             />
           )}
         </Grid>
+        <Divider mt={8} />
+        {userSolutions.length > 1 && (
+          <Box mt={8}>
+            <Heading fontSize="2xl" mb={8}>
+              Your Previous Proposals
+            </Heading>
+            {userSolutions.map((solution, index) => {
+              return (
+                <Box
+                  id={`previous-proposal-${index}`}
+                  width={gridDimension}
+                  margin="auto"
+                  mb={4}
+                >
+                  <Text fontSize="xl">Propsal {index + 1}</Text>
+                  <CoordinateGrid
+                    id={`previous-proposal-grid-${index}`}
+                    activeIcons={[
+                      ...projectDefaultCoordinates,
+                      ...solution.solution,
+                    ]}
+                    gridHeight={gridDimension}
+                    gridWidth={gridDimension}
+                  />
+                </Box>
+              );
+            })}
+          </Box>
+        )}
       </Box>
     </Box>
   );
