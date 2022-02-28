@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps }) {
         <ChakraProvider theme={theme}>
           <Box>
             <Navbar />
-            <Box maxWidth="1048px" margin="auto" padding="20px" mt={10}>
+            <Box maxWidth="1048px" margin="auto" padding="20px">
               <Component {...pageProps} />
             </Box>
           </Box>
