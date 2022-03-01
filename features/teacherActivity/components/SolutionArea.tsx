@@ -33,7 +33,6 @@ const TopProposals = ({
 
   const { solutions } = solutionProps;
 
-  console.log({ solutions });
   return (
     <Box mt={8}>
       {title && <Heading size="md">{title}</Heading>}
