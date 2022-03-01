@@ -33,6 +33,7 @@ const TopProposals = ({
 
   const { solutions } = solutionProps;
 
+  console.log({ solutions });
   return (
     <Box mt={8}>
       {title && <Heading size="md">{title}</Heading>}
@@ -56,27 +57,13 @@ const TopProposals = ({
 
       {Boolean(solutions.length) && (
         <Grid templateColumns={["1fr", "1fr", "1fr", "1fr 1fr"]} mt={4} mb={4}>
-          {solutions.map((solution, index) => {
+          {solutions.map((solution) => {
             return (
-              <Box
-                display="inline-flex"
-                key={solution.id}
-                alignItems="flex-start"
-                textAlign="center"
-                mb={8}
-                maxWidth="50%"
-              >
+              <Box key={solution.id} textAlign="center" mb={8}>
                 <Text
-                  display="block"
-                  fontSize="xl"
-                  textAlign="center"
-                  padding={2}
-                  pl={3}
-                  pr={3}
-                >
-                  #{index + 1}
-                </Text>
-
+                  as="b"
+                  fontSize="lg"
+                >{`${solution.studentName}'s Proposal`}</Text>
                 <Box
                   display="inline-block"
                   backgroundColor={

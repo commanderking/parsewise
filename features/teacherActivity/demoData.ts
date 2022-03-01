@@ -4,6 +4,8 @@ import { Comment } from "model/comment";
 import { proposals, comments, students } from "data/celltower/solutions";
 import { Student } from "model/student";
 
+// This is mimicking some layer of the app. It might move to backend or frontend right after request, or selector work
+
 const formatComments = (comments: Comment[], students: Student[]) => {
   const studentsById = _.keyBy(students, "id");
 
@@ -19,14 +21,18 @@ const formatComments = (comments: Comment[], students: Student[]) => {
 // activityId will be necessary in the longterm
 export const getFormattedProposals = (
   proposals,
-  comments,
-  students
+  comments: Comment[],
+  students: Student[]
 ): StudentSolution[] => {
   const commentsByProposalId = _.groupBy(comments, "activityId");
+  const studentsById = _.keyBy(students, "id");
+
+  console.log({ studentsById });
   return proposals.map((proposal) => {
     const commentsForProposal = commentsByProposalId[proposal.id] || [];
     return {
       ...proposal,
+      studentName: studentsById[proposal.studentId]?.name || null,
       votes: Math.round(Math.random() * 5),
       comments: formatComments(commentsForProposal, students),
     };

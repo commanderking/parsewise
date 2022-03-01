@@ -30,7 +30,7 @@ export const students = studentIds.map((studentId, index) => {
 export const proposals = [
   {
     id: proposalId1,
-    studentId: "abc-123",
+    studentId: studentIds[0],
     author: "STUDENT",
     solution: [
       { x: -6, y: -2 },
@@ -42,7 +42,7 @@ export const proposals = [
   },
   {
     id: proposalId2,
-    studentId: "xyz-123",
+    studentId: studentIds[1],
     author: "STUDENT",
     solution: [
       { x: -1, y: -2 },
@@ -53,7 +53,7 @@ export const proposals = [
   },
   {
     id: proposalId3,
-    studentId: null,
+    studentId: studentIds[2],
     author: "TEACHER",
     solution: [
       { x: -2, y: 2 },
@@ -64,7 +64,7 @@ export const proposals = [
   },
   {
     id: proposalId4,
-    studentId: "abc-456",
+    studentId: studentIds[3],
     author: "STUDENT",
     solution: [
       {
@@ -95,7 +95,7 @@ export const proposals = [
   },
   {
     id: proposalId5,
-    studentId: "def-123",
+    studentId: studentIds[4],
     author: "STUDENT",
     solution: [
       { x: 0, y: 0, iconType: "CELL_TOWER" },
