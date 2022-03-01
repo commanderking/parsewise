@@ -1,7 +1,9 @@
-import { Box, Heading, Text, Divider, Button } from "@chakra-ui/react";
+import { Box, Heading, Text, Divider, Button, Grid } from "@chakra-ui/react";
 import { CheckCircle, Star } from "react-feather";
 import { StudentSolutions } from "features/teacherActivity/utils";
 import { CoordinateGrid } from "open-math-tools";
+
+import SolutionComments from "features/teacherActivity/components/SolutionComments";
 
 type Props = {
   // As more solution comes in, this may need to be more unions of the different solution types
@@ -53,7 +55,7 @@ const TopProposals = ({
       )}
 
       {Boolean(solutions.length) && (
-        <Box mt={4} mb={4}>
+        <Grid templateColumns={["1fr", "1fr", "1fr", "1fr 1fr"]} mt={4} mb={4}>
           {solutions.map((solution, index) => {
             return (
               <Box
@@ -62,6 +64,7 @@ const TopProposals = ({
                 alignItems="flex-start"
                 textAlign="center"
                 mb={8}
+                maxWidth="50%"
               >
                 <Text
                   display="block"
@@ -86,29 +89,29 @@ const TopProposals = ({
                     gridHeight={400}
                     gridWidth={400}
                   />
-                  {showMetrics && (
-                    <Box display="inline-flex" alignItems="center">
-                      <Box
-                        display="flex"
-                        alignItems="center"
-                        border="1px solid #ececec"
-                        borderRadius={4}
-                        height={10}
-                        pl={3}
-                        pr={3}
-                        mr={2}
-                      >
-                        <Text fontSize="xl" mr={1}>
-                          {solution.votes}
-                        </Text>
-                        <Box verticalAlign="top">
-                          <CheckCircle
-                            size={iconSize}
-                            strokeWidth={3}
-                            color="#00CC00"
-                          />
-                        </Box>
+                  <Box display="inline-flex" alignItems="center">
+                    <Box
+                      display="flex"
+                      alignItems="center"
+                      border="1px solid #ececec"
+                      borderRadius={4}
+                      height={10}
+                      pl={3}
+                      pr={3}
+                      mr={2}
+                    >
+                      <Text fontSize="xl" mr={1}>
+                        {solution.votes}
+                      </Text>
+                      <Box verticalAlign="top">
+                        <CheckCircle
+                          size={iconSize}
+                          strokeWidth={3}
+                          color="#00CC00"
+                        />
                       </Box>
+                    </Box>
+                    {showMetrics && (
                       <Button
                         onClick={() => {
                           starSolution(solution.id);
@@ -122,13 +125,16 @@ const TopProposals = ({
                           {solution.isStarred ? "Unstar" : "Star"}
                         </Text>
                       </Button>
-                    </Box>
-                  )}
+                    )}
+                  </Box>
+                  <Box mt={2}>
+                    <SolutionComments comments={solution.comments} />
+                  </Box>
                 </Box>
               </Box>
             );
           })}
-        </Box>
+        </Grid>
       )}
       <Divider />
     </Box>

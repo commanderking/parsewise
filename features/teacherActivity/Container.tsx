@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Box, Heading } from "@chakra-ui/react";
 import { demoData } from "./demoData";
 import { formatStudentSolutions } from "features/teacherActivity/utils";
 import cellTowerActivity from "data/celltower/camden.json";

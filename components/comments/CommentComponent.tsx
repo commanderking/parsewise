@@ -1,13 +1,16 @@
-import { Box, Grid } from "@chakra-ui/react";
-import { Comment } from "components/comments/types";
+import { Grid, Text } from "@chakra-ui/react";
+import { Comment } from "model/comment";
 
 type Props = Comment;
 
-export const CommentComponent = ({ text, name }: Props) => {
+export const CommentComponent = ({ text, studentName }: Props) => {
   return (
-    <Box>
-      <Grid templateColumns={["50px", "1fr"]}></Grid>
-    </Box>
+    <Grid p={2} borderBottom="1px solid lightgray">
+      <Text as="b" textAlign="left">
+        {studentName}
+      </Text>
+      <Text textAlign="left">{text}</Text>
+    </Grid>
   );
 };
 

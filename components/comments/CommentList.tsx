@@ -1,6 +1,6 @@
 import CommentComponent from "components/comments/CommentComponent";
 import { Box, Heading } from "@chakra-ui/react";
-import { Comment } from "components/comments/types";
+import { Comment } from "model/comment";
 
 type Props = {
   comments: Comment[];
@@ -13,15 +13,19 @@ const CommentList = ({ comments }: Props) => {
     </Box>
   );
 
+  const visibleComments = comments.filter(
+    (comment) => comment.studentId && comment.studentName
+  );
+
   return (
     <Box borderTop="1px solid lightgray" p={1}>
       <Heading mt={2} fontSize="lg">
         Comments
       </Heading>
-      {!comments.length ? (
+      {!visibleComments.length ? (
         <NoCommentDisplay />
       ) : (
-        comments.map((comment) => {
+        visibleComments.map((comment) => {
           return (
             <Box>
               <CommentComponent {...comment} />
