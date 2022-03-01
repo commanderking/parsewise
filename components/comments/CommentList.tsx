@@ -1,6 +1,6 @@
 import CommentComponent from "components/comments/CommentComponent";
-import { Box, Heading } from "@chakra-ui/react";
-import { Comment } from "components/comments/types";
+import { Box, Heading, Text } from "@chakra-ui/react";
+import { Comment } from "model/comment";
 
 type Props = {
   comments: Comment[];

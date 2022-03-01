@@ -1,4 +1,6 @@
 // Raw data that will be stored in db
+import { Comment } from "model/comment";
+
 export type CoordinateGridSolution = {
   x: number;
   y: number;
@@ -10,12 +12,6 @@ export type CoordinateGridSolution = {
 export type CoordinateGridRenderedSolution = CoordinateGridSolution & {
   image: string;
   size: number;
-};
-
-export type Comment = {
-  activityId: string;
-  text: string;
-  approved: boolean;
 };
 
 type Author = "STUDENT" | "TEACHER";
