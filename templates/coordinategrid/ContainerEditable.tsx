@@ -6,14 +6,12 @@ import {
   Textarea,
   IconButton,
   Button,
-  useBreakpointValue,
 } from "@chakra-ui/react";
-import { CoordinateGrid } from "open-math-tools";
+import ResponsiveGrid from "templates/coordinategrid/components/ResponsiveGrid";
 import { iconMap } from "constants/icons";
 import Image from "next/image";
 import { saveCustomProject } from "templates/coordinategrid/requests";
 import dynamic from "next/dynamic";
-import { gridBreakpointDimensions } from "templates/coordinategrid/constants";
 
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { EditorState, ContentState, convertToRaw } from "draft-js";
@@ -45,8 +43,6 @@ const CoordinateGridContainer = ({ data }) => {
       size: 15,
     }))
   );
-
-  const gridDimension = useBreakpointValue(gridBreakpointDimensions);
 
   const [editorState, setEditorState] = useState(() => {
     const contentBlock = window ? htmlToDraft(data.overview) : null;
@@ -113,10 +109,8 @@ const CoordinateGridContainer = ({ data }) => {
       </Box>
       <Box mt={8}>
         <Heading size="lg">Starting Grid</Heading>
-        <CoordinateGrid
+        <ResponsiveGrid
           id="coordinate grid"
-          gridHeight={gridDimension}
-          gridWidth={gridDimension}
           activeIcons={activeIcons}
           onIconClick={handleIconClick}
           addableIcon={{

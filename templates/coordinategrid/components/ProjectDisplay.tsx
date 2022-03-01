@@ -1,30 +1,21 @@
 import { useState } from "react";
-import {
-  Box,
-  Heading,
-  Text,
-  Grid,
-  Divider,
-  useBreakpointValue,
-} from "@chakra-ui/react";
+import { Box, Heading, Text, Grid, Divider } from "@chakra-ui/react";
 import SolutionAreaDescription from "templates/coordinategrid/components/SolutionAreaDescription";
 import {
   getDefaultIconCoordinates,
   getPlacedIconCoordinates,
 } from "templates/coordinategrid/utils";
-import {
-  CoordinateGridPhases,
-  gridBreakpointDimensions,
-} from "templates/coordinategrid/constants";
+import { CoordinateGridPhases } from "templates/coordinategrid/constants";
 import ProjectDescription from "templates/coordinategrid/components/ProjectDescription";
 import PhaseCompletionPrompt from "templates/coordinategrid/components/PhaseCompletionPrompt";
 import PeerReview from "templates/coordinategrid/components/peerreview/Container";
 import LearningResources from "templates/coordinategrid/components/LearningResources";
 import { StudentSolution } from "templates/coordinategrid/types";
 import { ProposalSubmitButton } from "templates/coordinategrid/components/ProposalSubmitButton";
-import { CoordinateGrid } from "open-math-tools";
 import { getNextPhase } from "templates/coordinategrid/utils";
 import CommentList from "components/comments/CommentList";
+import ResponsiveGrid from "templates/coordinategrid/components/ResponsiveGrid";
+
 type Props = {
   data: any;
   currentPhase: any;
@@ -46,8 +37,6 @@ const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
     ...projectDefaultCoordinates,
     ...mostRecentSolutionCoordinates,
   ];
-
-  const gridDimension = useBreakpointValue(gridBreakpointDimensions);
 
   const [activeIcons, setActiveIcons] = useState(allIcons);
   const [activity, setActivity] = useState([]);
@@ -115,11 +104,9 @@ const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
                 {data.phaseContent[currentPhase].solutionPromptHelper}
               </Text>
             )}
-            <Box width={gridDimension} margin="auto">
-              <CoordinateGrid
+            <Box margin="auto">
+              <ResponsiveGrid
                 id="coordinateGrid"
-                gridHeight={gridDimension}
-                gridWidth={gridDimension}
                 activeIcons={activeIcons}
                 onIconClick={handleIconClick}
                 addableIcon={addableIcon}
@@ -158,21 +145,14 @@ const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
             </Heading>
             {userSolutions.map((solution, index) => {
               return (
-                <Box
-                  id={`previous-proposal-${index}`}
-                  width={gridDimension}
-                  margin="auto"
-                  mb={4}
-                >
+                <Box id={`previous-proposal-${index}`} margin="auto" mb={4}>
                   <Text fontSize="xl">Propsal {index + 1}</Text>
-                  <CoordinateGrid
+                  <ResponsiveGrid
                     id={`previous-proposal-grid-${index}`}
                     activeIcons={[
                       ...projectDefaultCoordinates,
                       ...solution.solution,
                     ]}
-                    gridHeight={gridDimension}
-                    gridWidth={gridDimension}
                   />
                 </Box>
               );

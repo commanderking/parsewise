@@ -1,9 +1,9 @@
 import { Box, Heading, Text, Divider, Button, Grid } from "@chakra-ui/react";
 import { CheckCircle, Star } from "react-feather";
 import { StudentSolutions } from "features/teacherActivity/utils";
-import { CoordinateGrid } from "open-math-tools";
-
+import ResponsiveGrid from "templates/coordinategrid/components/ResponsiveGrid";
 import SolutionComments from "features/teacherActivity/components/SolutionComments";
+import { gridBreakpointDimensions } from "templates/coordinategrid/constants";
 
 type Props = {
   // As more solution comes in, this may need to be more unions of the different solution types
@@ -29,7 +29,7 @@ const TopProposals = ({
   noSolutionsText = "No solutions to display yet...",
 }: Props) => {
   // Component should be dynamic based on the activity type
-  const Component = CoordinateGrid;
+  const Component = ResponsiveGrid;
 
   const { solutions } = solutionProps;
 
@@ -69,12 +69,7 @@ const TopProposals = ({
                     solution.isStarred && showMetrics ? "lightyellow" : "white"
                   }
                 >
-                  <Component
-                    id="grid"
-                    activeIcons={solution.solution}
-                    gridHeight={400}
-                    gridWidth={400}
-                  />
+                  <Component id="grid" activeIcons={solution.solution} />
                   <Box display="inline-flex" alignItems="center">
                     <Box
                       display="flex"
@@ -113,7 +108,7 @@ const TopProposals = ({
                       </Button>
                     )}
                   </Box>
-                  <Box mt={2}>
+                  <Box mt={2} maxWidth={gridBreakpointDimensions}>
                     <SolutionComments comments={solution.comments} />
                   </Box>
                 </Box>
