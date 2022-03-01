@@ -25,6 +25,7 @@ export type StudentSolution = {
   votes?: number;
   isStarred?: boolean;
   comments?: Comment[];
+  studentName?: string;
 };
 
 export type Review = {
