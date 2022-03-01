@@ -2,8 +2,8 @@ import { Box, Heading, Text, Divider, Button, Grid } from "@chakra-ui/react";
 import { CheckCircle, Star } from "react-feather";
 import { StudentSolutions } from "features/teacherActivity/utils";
 import ResponsiveGrid from "templates/coordinategrid/components/ResponsiveGrid";
-
 import SolutionComments from "features/teacherActivity/components/SolutionComments";
+import { gridBreakpointDimensions } from "templates/coordinategrid/constants";
 
 type Props = {
   // As more solution comes in, this may need to be more unions of the different solution types
@@ -108,7 +108,7 @@ const TopProposals = ({
                       </Button>
                     )}
                   </Box>
-                  <Box mt={2} maxWidth="400px">
+                  <Box mt={2} maxWidth={gridBreakpointDimensions}>
                     <SolutionComments comments={solution.comments} />
                   </Box>
                 </Box>
