@@ -177,7 +177,7 @@ export const comments = [
   // Proposal 5
   {
     activityId: proposalId5,
-    text: "I think both houes F and H aren't covered by cell towers.",
+    text: "I think both house F and H aren't covered by cell towers.",
     studentId: studentIds[0],
     approved: false,
   },

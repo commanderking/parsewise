@@ -1,4 +1,4 @@
-import { Box, Grid, Text, Avatar } from "@chakra-ui/react";
+import { Grid, Text } from "@chakra-ui/react";
 import { Comment } from "model/comment";
 
 type Props = Comment;

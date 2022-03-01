@@ -1,4 +1,4 @@
-import { Box, Text, Textarea } from "@chakra-ui/react";
+import { Box, Textarea } from "@chakra-ui/react";
 
 const Comment = ({ comment, handleCommentChange }) => {
   return (
