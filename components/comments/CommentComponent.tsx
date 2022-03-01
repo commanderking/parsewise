@@ -1,13 +1,13 @@
-import { Box, Grid } from "@chakra-ui/react";
+import { Box, Grid, Text, Avatar } from "@chakra-ui/react";
 import { Comment } from "components/comments/types";
 
 type Props = Comment;
 
-export const CommentComponent = ({ text, name }: Props) => {
+export const CommentComponent = ({ text }: Props) => {
   return (
-    <Box>
-      <Grid templateColumns={["50px", "1fr"]}></Grid>
-    </Box>
+    <Grid p={2} borderBottom="1px solid lightgray">
+      <Text textAlign="left">{text}</Text>
+    </Grid>
   );
 };
 

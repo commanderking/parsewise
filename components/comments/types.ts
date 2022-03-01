@@ -1,4 +1,4 @@
 export type Comment = {
   text: string;
-  name: string;
+  approved: boolean;
 };

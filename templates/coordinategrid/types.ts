@@ -12,6 +12,12 @@ export type CoordinateGridRenderedSolution = CoordinateGridSolution & {
   size: number;
 };
 
+export type Comment = {
+  activityId: string;
+  text: string;
+  approved: boolean;
+};
+
 type Author = "STUDENT" | "TEACHER";
 
 export type StudentSolution = {
@@ -22,6 +28,7 @@ export type StudentSolution = {
   // This likely will be removed eventually when real data comes in. We'll need a new type which combiens StudentSolution with votes per that solution
   votes?: number;
   isStarred?: boolean;
+  comments?: Comment[];
 };
 
 export type Review = {
