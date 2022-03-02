@@ -17,26 +17,34 @@ const formatComments = (comments: Comment[], students: Student[]) => {
   });
 };
 
+const getApprovalCount = (comments: Comment[], activityId) => {
+  return comments.filter(
+    (comment) => comment.approved && comment.activityId === activityId
+  ).length;
+};
+
 // Votes will likely need to be merged on
 // activityId will be necessary in the longterm
 export const getFormattedProposals = (
-  proposals,
+  proposals: StudentSolution[],
   comments: Comment[],
   students: Student[]
 ): StudentSolution[] => {
   const commentsByProposalId = _.groupBy(comments, "activityId");
   const studentsById = _.keyBy(students, "id");
 
-  console.log({ studentsById });
-  return proposals.map((proposal) => {
+  const formattedProposals = proposals.map((proposal) => {
     const commentsForProposal = commentsByProposalId[proposal.id] || [];
+
     return {
       ...proposal,
       studentName: studentsById[proposal.studentId]?.name || null,
-      votes: Math.round(Math.random() * 5),
+      votes: getApprovalCount(comments, proposal.id),
       comments: formatComments(commentsForProposal, students),
     };
   });
+
+  return formattedProposals;
 };
 
 export const demoData = getFormattedProposals(proposals, comments, students);
