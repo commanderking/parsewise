@@ -68,13 +68,16 @@ export const submitFeedback = ({
 
 export const saveCustomProject = (project) => {
   if (window) {
-    window.localStorage.setItem(
-      "customProjects",
-      JSON.stringify([
-        ...(JSON.parse(window.localStorage.getItem("customProjects")) || []),
-        project,
-      ])
+    const existingProjects =
+      JSON.parse(window.localStorage.getItem("customProjects")) || [];
+
+    const projects = existingProjects.filter(
+      (existingProject) => existingProject.id !== project.id
     );
+
+    const allProjects = [...projects, project];
+
+    window.localStorage.setItem("customProjects", JSON.stringify(allProjects));
   }
 };
 
