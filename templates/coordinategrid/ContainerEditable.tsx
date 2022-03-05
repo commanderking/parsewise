@@ -18,7 +18,7 @@ import { EditorState, ContentState, convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 
 type Props = {
-  projectId: string;
+  projectId: string | string[]; // id straight from next router.query is typed as either
   data: any;
 };
 
