@@ -1,11 +1,6 @@
 {
   "id": "1",
   "name": "Providing Residents with Cell Phone Coverage",
-  "avatar": "robot_1",
-  "requirements": [
-    "Each unit on the grid represents 1 mile",
-    "Cell towers need to be at least 1 mile away from each house."
-  ],
   "overview": "<p>Your company is figuring out where to build cell towers to provide coverage to local residents. How many cell towers should they build and where?&nbsp;</p><p><strong>Details:</strong></p><ol><li>Each unit on the grid represents 1 mile</li><li>Houses within 4 miles of each cell tower can receive good cell coverage</li></ol>",
   "projectType": "COORDINATE_GRID",
   "projectData": {

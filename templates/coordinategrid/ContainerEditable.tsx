@@ -17,6 +17,11 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { EditorState, ContentState, convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 
+type Props = {
+  projectId: string | string[]; // id straight from next router.query is typed as either
+  data: any;
+};
+
 // Seems to be an issue with this version of htmlToDraft not handling dynamic imports correctly
 // https://github.com/jpuri/html-to-draftjs/issues/83
 let htmlToDraft = null;
@@ -29,7 +34,7 @@ const Editor = dynamic(
   { ssr: false }
 ) as any; // need to figure out how to type dynamic imports better
 
-const CoordinateGridContainer = ({ data }) => {
+const CoordinateGridContainer = ({ data, projectId }: Props) => {
   const [name, setName] = useState(data.name);
 
   const [placeableIcon, setPlaceableIcon] = useState(
@@ -70,6 +75,8 @@ const CoordinateGridContainer = ({ data }) => {
   const getOverviewHtml = (editorState) => {
     return draftToHtml(convertToRaw(editorState.getCurrentContent()));
   };
+
+  console.log({ projectId });
 
   return (
     <Box maxWidth={1024} margin="auto" mb={150}>
@@ -173,6 +180,7 @@ const CoordinateGridContainer = ({ data }) => {
                 placeableIcon,
               },
               sourceId: data.id,
+              id: projectId,
             });
           }}
           colorScheme="teal"

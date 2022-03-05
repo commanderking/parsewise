@@ -1,4 +1,4 @@
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import SolutionArea from "features/teacherActivity/components/SolutionArea";
 import { StudentSolutions } from "features/teacherActivity/utils";
 
@@ -21,7 +21,7 @@ const ShowcaseArea = ({ solutionProps }: Props) => {
       <SolutionArea
         solutionProps={solutionProps}
         title={title}
-        subtitle="Starred solutions will appear here and be shared with students in your class."
+        subtitle="Star solutions to highlight student examples for class discussion"
         showMetrics={false}
         noSolutionsText="No solutions starred yet."
       />
