@@ -1,4 +1,13 @@
-import { Box, Heading, Grid, Text, Button, Divider } from "@chakra-ui/react";
+import { useState } from "react";
+import {
+  Box,
+  Heading,
+  Grid,
+  Text,
+  Button,
+  Divider,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { getCustomProjects } from "templates/coordinategrid/requests";
 import { Edit } from "react-feather";
 import Link from "next/link";
@@ -6,10 +15,18 @@ import { CheckSquare, PlusSquare } from "react-feather";
 import demoProject from "data/celltower/camden.json";
 import ProjectCard from "features/teacherDashboard/components/ProjectCard";
 import { Project } from "model/project";
+import EditProjectModal from "features/teacherDashboard/components/EditProjectModal";
 
 const TeacherDashboardContainer = () => {
   const assignedProjects = [demoProject] as Project[];
   const customProjects: Project[] = getCustomProjects();
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [editingProjectId, setEditingProjectId] = useState<string | null>(null);
+
+  const editingProject = editingProjectId
+    ? customProjects.find((project) => project.id === editingProjectId)
+    : null;
 
   return (
     <Box>
@@ -43,7 +60,6 @@ const TeacherDashboardContainer = () => {
       <Heading mt={4} fontSize="2xl">
         My Custom Projects
       </Heading>
-
       <Text as="i">
         Edit projects to make them more relevant for your students
       </Text>
@@ -68,12 +84,16 @@ const TeacherDashboardContainer = () => {
                     <PlusSquare />
                     <Text ml={2}>Assign</Text>
                   </Button>
-                  <Link href={`/project/edit/${customProject.id}`}>
-                    <Button aria-label="Edit Button">
-                      <Edit />
-                      <Text ml={2}>Edit</Text>
-                    </Button>
-                  </Link>
+                  <Button
+                    aria-label="Edit Button"
+                    onClick={() => {
+                      setEditingProjectId(customProject.id);
+                      onOpen();
+                    }}
+                  >
+                    <Edit />
+                    <Text ml={2}>Edit</Text>
+                  </Button>
                   <Text display="block" as="i">
                     (assignment of projects is disabled for demo)
                   </Text>
@@ -83,6 +103,12 @@ const TeacherDashboardContainer = () => {
           );
         })}
       </Grid>
+
+      <EditProjectModal
+        project={editingProject}
+        isOpen={isOpen}
+        onClose={onClose}
+      />
     </Box>
   );
 };

@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <Box textAlign="center">
       <Head textAlign="center">
-        <title>Reason Loop - Truly Authentic Math Problems</title>
+        <title>Parsewise - Truly Authentic Math Problems</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
