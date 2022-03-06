@@ -15,6 +15,8 @@ import { ProposalSubmitButton } from "templates/coordinategrid/components/Propos
 import { getNextPhase } from "templates/coordinategrid/utils";
 import CommentList from "components/comments/CommentList";
 import ResponsiveGrid from "templates/coordinategrid/components/ResponsiveGrid";
+import { useBreakpointValue } from "@chakra-ui/react";
+import { gridBreakpointDimensions } from "templates/coordinategrid/constants";
 
 type Props = {
   data: any;
@@ -81,6 +83,8 @@ const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
     },
   };
 
+  const gridDimension = useBreakpointValue(gridBreakpointDimensions);
+
   return (
     <Box>
       <Box>
@@ -120,9 +124,11 @@ const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
               currentPhase={currentPhase}
               nextPhase={getNextPhase(currentPhase)}
             />
-            <Box mt={0}>
-              <CommentList comments={[]} />
-            </Box>
+            {currentPhase === CoordinateGridPhases.MODIFY_PROPOSAL && (
+              <Box mt={4}>
+                <CommentList comments={[]} />
+              </Box>
+            )}
           </Box>
           {currentPhase === CoordinateGridPhases.FIRST_PROPOSAL && (
             <Box>
@@ -140,20 +146,22 @@ const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
         <Divider mt={8} />
         {userSolutions.length > 1 && (
           <Box mt={8}>
-            <Heading fontSize="2xl" mb={8}>
+            <Heading fontSize="2xl" mb={4}>
               Your Previous Proposals
             </Heading>
             {userSolutions.map((solution, index) => {
               return (
                 <Box id={`previous-proposal-${index}`} margin="auto" mb={4}>
                   <Text fontSize="xl">Propsal {index + 1}</Text>
-                  <ResponsiveGrid
-                    id={`previous-proposal-grid-${index}`}
-                    activeIcons={[
-                      ...projectDefaultCoordinates,
-                      ...solution.solution,
-                    ]}
-                  />
+                  <Box margin="auto" width={gridDimension}>
+                    <ResponsiveGrid
+                      id={`previous-proposal-grid-${index}`}
+                      activeIcons={[
+                        ...projectDefaultCoordinates,
+                        ...solution.solution,
+                      ]}
+                    />
+                  </Box>
                 </Box>
               );
             })}

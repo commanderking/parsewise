@@ -20,7 +20,7 @@ const Container = () => {
           <DemoCard
             title="Teacher"
             description="View student results and comments, and customize projects for your students."
-            buttonText="See Teacher's Activity View"
+            buttonText="Try Teacher Demo"
             imageSrc="/student_solutions.gif"
             buttonHref="teacher/dashboard"
           />

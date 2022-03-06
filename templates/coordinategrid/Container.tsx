@@ -22,8 +22,6 @@ const CoordinateGridContainer = ({ data }) => {
 
   const currentPhase = useAppSelector(selectCurrentPhase);
 
-  console.log({ currentPhase });
-
   return (
     <Box maxWidth={projectContainerWidth} margin="auto">
       <Box mt={8}>
