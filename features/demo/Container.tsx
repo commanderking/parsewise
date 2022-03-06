@@ -9,9 +9,8 @@ const Container = () => {
       <Box mt={8} textAlign="center">
         <Box display="inline-block">
           <DemoCard
-            title="Student Activity"
-            description="Figure out the best locations to build cell towers to cover as many
-            households as possible."
+            title="Student"
+            description="Figure out the best locations to build cell towers to cover as many households as possible."
             buttonText="Try Student Demo"
             imageSrc="/demo_2.gif"
             buttonHref="/project/1"
@@ -19,20 +18,11 @@ const Container = () => {
         </Box>
         <Box display="inline-block" ml={[0, 8]}>
           <DemoCard
-            title="Teacher's View"
-            description="See student results and showcase student responses to start meaningful discussions"
+            title="Teacher"
+            description="View student results and comments, and customize projects for your students."
             buttonText="See Teacher's Activity View"
             imageSrc="/student_solutions.gif"
-            buttonHref="teacher/activity/demo"
-          />
-        </Box>
-        <Box display="inline-block" ml={[0, 8]}>
-          <DemoCard
-            title="Customize Activity"
-            description="Edit default lessons to make them more relevant for your community."
-            buttonText="Edit Custom Lesson"
-            imageSrc="/student_solutions.gif"
-            buttonHref="project/edit/1"
+            buttonHref="teacher/dashboard"
           />
         </Box>
       </Box>

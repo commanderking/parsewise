@@ -6,6 +6,7 @@ import {
   Textarea,
   IconButton,
   Button,
+  Divider,
 } from "@chakra-ui/react";
 import ResponsiveGrid from "templates/coordinategrid/components/ResponsiveGrid";
 import { iconMap } from "constants/icons";
@@ -16,10 +17,12 @@ import dynamic from "next/dynamic";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { EditorState, ContentState, convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
+import { Project } from "model/project";
 
 type Props = {
-  projectId: string | string[]; // id straight from next router.query is typed as either
-  data: any;
+  data: Project;
+  onSave: (project: Project) => void;
+  onCancel?: () => void;
 };
 
 // Seems to be an issue with this version of htmlToDraft not handling dynamic imports correctly
@@ -34,13 +37,14 @@ const Editor = dynamic(
   { ssr: false }
 ) as any; // need to figure out how to type dynamic imports better
 
-const CoordinateGridContainer = ({ data, projectId }: Props) => {
+const CoordinateGridContainer = ({ data, onSave, onCancel }: Props) => {
   const [name, setName] = useState(data.name);
 
   const [placeableIcon, setPlaceableIcon] = useState(
     data.projectData?.addableIcon?.iconType
   );
 
+  const [placedIcon, setPlacedIcon] = useState(iconMap.HOUSE.id);
   const [activeIcons, setActiveIcons] = useState(
     data.projectData.placedIcons.map((coordinate) => ({
       ...coordinate,
@@ -75,8 +79,6 @@ const CoordinateGridContainer = ({ data, projectId }: Props) => {
   const getOverviewHtml = (editorState) => {
     return draftToHtml(convertToRaw(editorState.getCurrentContent()));
   };
-
-  console.log({ projectId });
 
   return (
     <Box maxWidth={1024} margin="auto" mb={150}>
@@ -130,7 +132,8 @@ const CoordinateGridContainer = ({ data, projectId }: Props) => {
               const addedIconInfo = {
                 x,
                 y,
-                image: iconMap.HOUSE.src,
+                image: iconMap[placedIcon].src,
+                iconType: placedIcon,
                 size: 15,
                 timestamp: Date.now(),
                 canRemove: true,
@@ -167,10 +170,11 @@ const CoordinateGridContainer = ({ data, projectId }: Props) => {
           })}
         </Box>
       </Box>
-      <Box mt={8}>
+      <Divider mt={4} mb={4} />
+      <Box mt={8} textAlign="right">
         <Button
           onClick={() => {
-            saveCustomProject({
+            onSave({
               ...data,
               name,
               overview: getOverviewHtml(editorState),
@@ -179,14 +183,24 @@ const CoordinateGridContainer = ({ data, projectId }: Props) => {
                 placedIcons: activeIcons,
                 placeableIcon,
               },
-              sourceId: data.id,
-              id: projectId,
+              id: data.id,
             });
           }}
           colorScheme="teal"
         >
-          Save Custom Project
+          Save
         </Button>
+        {onCancel && (
+          <Button
+            ml={4}
+            onClick={() => {
+              onCancel();
+            }}
+            colorScheme="red"
+          >
+            Close
+          </Button>
+        )}
       </Box>
     </Box>
   );
