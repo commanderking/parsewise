@@ -31,9 +31,9 @@ export default function Home() {
             <Image src="/demo_2.gif" alt="demo gif" width={500} height={500} />
           </Box>
           <Box mt={4} textAlign="center" display="inline-block">
-            <Link href="/project/1">
+            <Link href="/demo">
               <Button colorScheme="teal" width={100}>
-                Try It!
+                Demo it!
               </Button>
             </Link>
             <Box display="inline-block">
