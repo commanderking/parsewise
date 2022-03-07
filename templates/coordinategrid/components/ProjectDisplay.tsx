@@ -44,6 +44,10 @@ const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
   const [activity, setActivity] = useState([]);
 
   const handleIconClick = (icon) => {
+    if (currentPhase === CoordinateGridPhases.FINAL_SOLUTION) {
+      return;
+    }
+
     if (!icon.canRemove) {
       return;
     }
@@ -152,7 +156,9 @@ const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
             {userSolutions.map((solution, index) => {
               return (
                 <Box id={`previous-proposal-${index}`} margin="auto" mb={4}>
-                  <Text fontSize="xl">Propsal {index + 1}</Text>
+                  <Text fontSize="xl">
+                    Propsal {userSolutions.length - index}
+                  </Text>
                   <Box margin="auto" width={gridDimension}>
                     <ResponsiveGrid
                       id={`previous-proposal-grid-${index}`}

@@ -64,7 +64,7 @@
       "solutionPromptHelper": "Click a coordinate to place a cell tower."
     },
     "FIRST_PROPOSAL": {
-      "instructions": "Thanks for sharing your initial thoughts! As a next step, review some of the skills that might help you improve on your initial proposal. When you're ready, submit your first proposal (you can still edit later).",
+      "instructions": "As a next step, review some of the skills that might help you improve on your initial proposal. When you're ready, submit your first proposal (you can still edit later).",
       "solutionPrompt": "Your Current Proposal",
       "solutionPromptHelper": "Edit and submit your proposal."
     },
@@ -75,7 +75,7 @@
     },
     "FINAL_SOLUTION": {
       "solutionPrompt": "Final Proposal",
-      "instructions": "Thanks for submitting your final proposal! You can continue providing feedback to your peers.",
+      "instructions": "Proposal submitted! You can still provide feedback to your peers.",
       "solutionPromptHelper": "All set!"
     }
   },
