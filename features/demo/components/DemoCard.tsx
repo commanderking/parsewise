@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";
-
+import { clearProposals } from "templates/coordinategrid/requests";
 type Props = {
   title: string;
   description: string;
@@ -56,6 +56,9 @@ const DemoCard = ({
               }}
               _focus={{
                 bg: "green.500",
+              }}
+              onClick={() => {
+                clearProposals();
               }}
             >
               {buttonText}

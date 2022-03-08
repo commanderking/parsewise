@@ -42,6 +42,10 @@ export const submitProposal = ({
   }
 };
 
+export const clearProposals = () => {
+  window.localStorage.clear();
+};
+
 export const submitFeedback = ({
   projectId,
   studentId,
