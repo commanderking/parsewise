@@ -22,8 +22,8 @@ const demoMessages = {
   [CoordinateGridPhases.FIRST_PROPOSAL]: {
     id: CoordinateGridPhases.FIRST_PROPOSAL,
     context:
-      "After teacher led instruction, students are asked to revise their prediction based on what they've learned. ",
-    nextStep: "Submit your first official proposal.",
+      "After they're taught the relevant lessons or units, students are asked to revise their prediction based on what they've learned.",
+    nextStep: "Submit your first proposal.",
   },
   [CoordinateGridPhases.MODIFY_PROPOSAL]: {
     id: CoordinateGridPhases.MODIFY_PROPOSAL,
@@ -35,7 +35,7 @@ const demoMessages = {
   [CoordinateGridPhases.FINAL_SOLUTION]: {
     id: CoordinateGridPhases.FINAL_SOLUTION,
     context:
-      "Nice! After all students have finalized their solutions, the teacher can share solutions with all students.",
+      "Nice! After all students have finalized their solutions, the teacher can share specific student solutions and lead a discussion about different solutions.",
     nextStep: "",
   },
 } as const;
