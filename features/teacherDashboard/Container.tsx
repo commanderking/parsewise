@@ -24,12 +24,10 @@ const TeacherDashboardContainer = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [editingProjectId, setEditingProjectId] = useState<string | null>(null);
 
-  console.log({ editingProjectId });
   const editingProject = editingProjectId
     ? customProjects.find((project) => project.id === editingProjectId)
     : null;
 
-  console.log({ editingProject });
   return (
     <Box>
       <Heading fontSize="2xl">Assigned Projects</Heading>
