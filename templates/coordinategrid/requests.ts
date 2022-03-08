@@ -1,4 +1,5 @@
 import { Phase } from "templates/types";
+import defaultProject from "data/celltower/camden.json";
 
 type ProposalProps = {
   projectId: string | string[];
@@ -81,10 +82,11 @@ export const saveCustomProject = (project) => {
   }
 };
 
+// FOR DEMO - default to a default Project to edit
 export const getCustomProjects = () => {
   if (window) {
     const customProjects = window.localStorage.getItem("customProjects");
 
-    return JSON.parse(customProjects) || [];
+    return JSON.parse(customProjects) || [defaultProject];
   }
 };
