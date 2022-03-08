@@ -22,7 +22,7 @@ const demoMessages = {
   [CoordinateGridPhases.FIRST_PROPOSAL]: {
     id: CoordinateGridPhases.FIRST_PROPOSAL,
     context:
-      "After they're taught the relevant lessons or units, students are asked to revise their prediction based on what they've learned.",
+      "After being taught the relevant material, students can revise their prediction based on what they've learned.",
     nextStep: "Submit your first proposal.",
   },
   [CoordinateGridPhases.MODIFY_PROPOSAL]: {
