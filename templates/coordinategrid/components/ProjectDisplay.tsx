@@ -102,7 +102,10 @@ const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
       <Box padding={[2, 8]} textAlign="center" border="1px solid #ececec">
         <PhaseCompletionPrompt data={data} currentPhase={currentPhase} />
 
-        <Grid templateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)"]} gap={8}>
+        <Grid
+          templateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)"]}
+          gap={[16, 8]}
+        >
           <Box display="block" id="hey">
             <SolutionAreaDescription
               solutionPrompt={data.phaseContent[currentPhase].solutionPrompt}
@@ -120,19 +123,22 @@ const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
                 addableIcon={addableIcon}
               />
             </Box>
-            <ProposalSubmitButton
-              isDisabled={!Boolean(activeIcons.length)}
-              addedIcons={activeIcons.filter(
-                (activeIcon) => activeIcon.canRemove
-              )}
-              currentPhase={currentPhase}
-              nextPhase={getNextPhase(currentPhase)}
-            />
+
             {currentPhase === CoordinateGridPhases.MODIFY_PROPOSAL && (
               <Box mt={4}>
                 <CommentList comments={[]} />
               </Box>
             )}
+            <Box mt={1}>
+              <ProposalSubmitButton
+                isDisabled={!Boolean(activeIcons.length)}
+                addedIcons={activeIcons.filter(
+                  (activeIcon) => activeIcon.canRemove
+                )}
+                currentPhase={currentPhase}
+                nextPhase={getNextPhase(currentPhase)}
+              />
+            </Box>
           </Box>
           {currentPhase === CoordinateGridPhases.FIRST_PROPOSAL && (
             <Box>
@@ -141,10 +147,12 @@ const ProjectDisplay = ({ data, currentPhase, userSolutions = [] }: Props) => {
           )}
           {(currentPhase === CoordinateGridPhases.MODIFY_PROPOSAL ||
             currentPhase === CoordinateGridPhases.FINAL_SOLUTION) && (
-            <PeerReview
-              currentPhase={currentPhase}
-              projectDefaultCoordinates={projectDefaultCoordinates}
-            />
+            <Box borderTop={["1px solid black", "0px"]} paddingTop={[4, 0]}>
+              <PeerReview
+                currentPhase={currentPhase}
+                projectDefaultCoordinates={projectDefaultCoordinates}
+              />
+            </Box>
           )}
         </Grid>
         <Divider mt={8} />

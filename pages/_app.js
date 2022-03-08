@@ -15,15 +15,13 @@ function MyApp({ Component, pageProps }) {
       cache: new InMemoryCache(),
     });
 
-  console.log({ store });
-
   return (
     <Provider store={store}>
       <ApolloProvider client={apolloClient}>
         <ChakraProvider theme={theme}>
           <Box>
             <Navbar />
-            <Box maxWidth="1048px" margin="auto" padding="20px">
+            <Box maxWidth="1048px" margin="auto" padding={["10px", "20px"]}>
               <Component {...pageProps} />
             </Box>
           </Box>

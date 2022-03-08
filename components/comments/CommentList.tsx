@@ -8,7 +8,7 @@ type Props = {
 
 const CommentList = ({ comments }: Props) => {
   const NoCommentDisplay = () => (
-    <Box mt={4} p={5} backgroundColor="lightgray">
+    <Box mt={4} p={4} border="1px dashed lightgray">
       No comments yet. Comments will appear after others review your work!
     </Box>
   );
@@ -18,7 +18,7 @@ const CommentList = ({ comments }: Props) => {
   );
 
   return (
-    <Box borderTop="1px solid lightgray" p={1}>
+    <Box>
       <Heading mt={2} fontSize="lg">
         Comments
       </Heading>
