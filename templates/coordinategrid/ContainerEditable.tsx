@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   Box,
   Heading,
@@ -7,6 +7,9 @@ import {
   IconButton,
   Button,
   Divider,
+  Input,
+  InputGroup,
+  InputLeftAddon,
 } from "@chakra-ui/react";
 import ResponsiveGrid from "templates/coordinategrid/components/ResponsiveGrid";
 import { iconMap } from "constants/icons";
@@ -24,6 +27,8 @@ type Props = {
   onSave: (project: Project) => void;
   onCancel?: () => void;
 };
+
+const StyledHeading = ({ children }) => <Heading size="lg">{children}</Heading>;
 
 // Seems to be an issue with this version of htmlToDraft not handling dynamic imports correctly
 // https://github.com/jpuri/html-to-draftjs/issues/83
@@ -48,7 +53,7 @@ const CoordinateGridContainer = ({ data, onSave, onCancel }: Props) => {
   const [activeIcons, setActiveIcons] = useState(
     data.projectData.placedIcons.map((coordinate) => ({
       ...coordinate,
-      image: iconMap[coordinate.iconType].src,
+      image: iconMap[placedIcon].src,
       size: 15,
     }))
   );
@@ -83,9 +88,7 @@ const CoordinateGridContainer = ({ data, onSave, onCancel }: Props) => {
   return (
     <Box maxWidth={1024} margin="auto" mb={150}>
       <Box>
-        <Heading mb={2} size="lg">
-          Project Name
-        </Heading>
+        <StyledHeading>Project Name</StyledHeading>
         <Textarea
           onChange={(e) => {
             setName(e.target.value);
@@ -95,9 +98,7 @@ const CoordinateGridContainer = ({ data, onSave, onCancel }: Props) => {
       </Box>
 
       <Box mt={8}>
-        <Heading mb={2} size="lg">
-          Description
-        </Heading>
+        <StyledHeading>Description</StyledHeading>
         <Box border="1px solid" borderColor="gray.200" pl={4} pr={4}>
           <Editor
             editorState={editorState}
@@ -117,7 +118,7 @@ const CoordinateGridContainer = ({ data, onSave, onCancel }: Props) => {
         </Box>
       </Box>
       <Box mt={8}>
-        <Heading size="lg">Starting Grid</Heading>
+        <StyledHeading>Starting Grid</StyledHeading>
         <ResponsiveGrid
           id="coordinate grid"
           activeIcons={activeIcons}
@@ -145,8 +146,9 @@ const CoordinateGridContainer = ({ data, onSave, onCancel }: Props) => {
         />
       </Box>
       <Box mt={8}>
-        <Text>Placeable Icon (icon student will be able to add)</Text>
-        <Box>
+        <StyledHeading>Placeable Icon</StyledHeading>
+        <Text as="i">(icon student will be able to add)</Text>
+        <Box mt={4}>
           {availableIcons.map((icon) => {
             const isSelectedPlaceableIcon =
               icon.id === placeableIcon ? "teal" : "";
@@ -159,10 +161,10 @@ const CoordinateGridContainer = ({ data, onSave, onCancel }: Props) => {
                 border={
                   isSelectedPlaceableIcon ? "3px solid teal" : "3px solid white"
                 }
-                padding={15}
+                padding={20}
                 aria-label="icon"
                 icon={
-                  <Image src={icon.src} alt="icon" width="20px" height="20px" />
+                  <Image src={icon.src} alt="icon" width="25px" height="25px" />
                 }
                 theme="ghost"
               />
